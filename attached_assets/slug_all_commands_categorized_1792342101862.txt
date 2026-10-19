@@ -1,0 +1,2783 @@
+SLUG DISCORD BOT — COMMANDS ORGANIZED BY OFFICIAL CATEGORY NAMES
+Source: uploaded Slug commands page and separate Moderation capture
+Note: the full-page HTML snapshot does not retain a category field for each command card. Moderation is preserved from its category-specific capture; remaining commands are classified by command name and description into Slug’s official category names. Ambiguous assignments may need manual verification.
+
+—> moderation (official category; 267 entries)
+============================
+
+- appeal — Manage punishment appeals.
+  · approve (appeal_id) [note] — Approve a pending appeal.
+  · autorevert (state) — Toggle whether approved appeals automatically reverse the punishment.
+  · cooldown (duration) — Set how long a user must wait between rejected appeals.
+  · disable — Disable user appeals.
+  · enable — Enable user appeals through the website.
+  · list [status] — List submitted appeals.
+  · logs [channel] — Set the channel where appeal decisions are logged.
+  · managers — Manage who can review appeals.
+  · questions — Manage appeal questions.
+  · reject (appeal_id) [note] — Reject a pending appeal.
+  · status — Show current appeal configuration.
+  · view (appeal_id) — View an appeal's details.
+  · · managers add (target) — Grant a role or user permission to review appeals.
+  · · managers remove (target) — Revoke appeal review permission.
+  · · questions add (question) — Add a new appeal question.
+  · · questions remove (question_id) — Remove an appeal question by id.
+
+- audit (user) (action) — View server audit log entries.
+
+- ban (member) [reason] — Ban a member from the server.
+
+- chatban — Manage chat bans
+  · add (target) — Ban a user from chatting
+  · config — View the current chat bans and configuration
+  · list — View everyone currently chat banned.
+  · managers — Manage roles and users who can use chatban commands.
+  · remove (target) — Remove a user from chat bans
+  · setup — Set up the chatban role and deny send_messages in all channels.
+  · · managers add (target) — Add a chatban manager.
+  · · managers remove (target) — Remove a chatban manager.
+
+- cleanup [amount] — Remove bot messages and command invocations.
+
+- clearsnipes — Clear all snipes in the current channel.
+
+- drag [args] — Drag member(s) to the voice channel.
+  · all (channel) — Move all members to another voice channel.
+
+- editsnipe — Snipe the latest edited message.
+
+- emoji (emoji) — Enlarge an emoji or view emoji commands.
+  · add [image] (name) — Add an emoji to the server.
+  · archive — Archive all emojis into a zip file.
+  · delete (emoji) — Delete an existing emoji.
+  · information (emoji) — View detailed information about an emoji.
+  · many (emojis) — Add multiple emojis to the server.
+  · rename (emoji) (name) — Rename an existing emoji.
+  · sticker (name) (emoji) — Convert a custom emoji to a sticker.
+  · · add many (emojis) — Add multiple emojis to the server.
+  · · add reactions (message) — Add emojis from the reactions on a message.
+  · · archive restore [attachment] — Restore emojis from an archive.
+
+- hardban (user) [duration] [reason] — Hardban a member (ban and delete messages).
+
+- hide (channel) (target) [reason] — Hide a channel from a member or role.
+  · all [target] [reason] — Hide all channels from a member or role.
+
+- history (command) — Shows all moderation cases that used a specific action (e.g., mute, ban, warn).
+  · remove (case_id) — Remove a specific moderation case by its ID.
+  · removeall (user) — Remove all moderation cases for a specific user.
+  · view (case_id) — View the details of a specific moderation case by its ID.
+
+- immune
+  · add
+  · list — List all immune users and roles.
+  · remove
+  · · add role (role) — Add role to immune list.
+  · · add user (member) — Add user to immune list.
+  · · remove role (role) — Remove role from immune list.
+  · · remove user (member) — Remove user from immune list.
+
+- jail (member) [duration] [reason] — Jail a member, removing all their roles.
+  · channel (channel) — Set the channel where jailed members are sent.
+  · config — View the current jail configuration.
+  · list — View everyone currently jailed.
+  · manager — Manage roles and users who can use jail commands.
+  · message (message) — Set the message sent in the jail channel when a member is jailed.
+  · reset — Delete the jail category, channels, and role.
+  · role (role) — Set an existing role as the jail role.
+  · setup — Automatically create the jail role, category, and channels.
+  · · manager add (target) — Add a jail manager.
+  · · manager list — List all jail managers.
+  · · manager remove (target) — Remove a jail manager.
+
+- kick (member) [reason] — Kick a member from the server.
+
+- lockdown (channel) [reason] — Prevent members from sending messages.
+  · all [reason] — Prevent members from sending messages in all channels.
+  · ignore (channel) — Ignore a channel from being unintentionally locked.
+  · role (role) — Set the role which will be locked from sending messages.
+  · · ignore list — View all channels being ignored.
+  · · ignore remove (channel) — Remove a channel from being ignored.
+
+- manager — Configure the moderation approval manager.
+  · remove — Remove the configured manager.
+  · set (user) — Set the manager who receives approval DMs.
+  · toggle — Toggle whether mod actions require manager approval.
+
+- modcases — Shows moderation cases in a paginated format
+  · edit (case_id) — Edit a modcase reason.
+  · view (case_id) — View a specific moderation case by case ID.
+
+- modrole — Configure roles that bypass permission and hierarchy checks for mod commands.
+  · add (role) (cmd_names) — Add a mod role, optionally scoped to specific commands.
+  · remove (role) — Remove a mod role.
+
+- modstats (moderator) — Shows all moderation cases handled by the specified moderator.
+
+- modsystem — Configure the moderation permission system, trusted staff and daily limits.
+  · admin — Manage trusted admins (ban, kick, mute, manage roles).
+  · adminrole [role] — Set (or clear) the role granting admin-level bot permissions.
+  · confirm [status] — Toggle confirmation prompts (Approve/Decline) for moderation actions (ban, kick, etc.).
+  · limit (scope) (action) (count) — Set a daily action limit. Use 0 to remove.
+  · limits — View all daily action limits.
+  · mod — Manage trusted mods (mute, unmute, warn, nicknames).
+  · mode (mode) — Set the permission system mode.
+  · modrole [role] — Set (or clear) the role granting moderator-level bot permissions.
+  · stats [member] — Show moderation action counts for a moderator (or the whole server).
+  · · admin add (member) — Add a trusted admin.
+  · · admin list — List trusted admins.
+  · · admin remove (member) — Remove a trusted admin.
+  · · mod add (member) — Add a trusted mod.
+  · · mod list — List trusted mods.
+  · · mod remove (member) — Remove a trusted mod.
+
+- moveall (channel) — Move all members to another voice channel.
+
+- newusers [amount] — View a list of the newest members.
+
+- nickname (member) [nickname] — Change a member's nickname.
+  · force (member) [nickname] — Force a member's nickname.
+  · remove (member) — Reset a member's nickname.
+  · · force cancel (member) — Cancel a member's forced nickname.
+
+- notifier — Configure mod action notifications to the server owner.
+  · toggle — Toggle DM notifications to the server owner for every mod action.
+
+- nsfw (channel) — Mark a channel as NSFW or SFW.
+
+- nuke — Clone the current channel.
+
+- picperms (channel) (user) — Toggle picture permissions for a user.
+
+- pin (message) — Pin a specific message.
+  · list — List of pinned msgs.
+
+- purge [user] [amount] — Remove messages which meet a criteria.
+  · after (message) — Remove messages after a target message.
+  · before (message) — Remove messages before a target message.
+  · between (start) (finish) — Remove messages between two messages.
+  · bots [amount] — Remove messages which are from a bot.
+  · contains (substring) [amount]
+  · embeds [amount] — Remove messages which have embeds.
+  · emojis [amount] — Remove messages which have custom emojis.
+  · endswith (substring) [amount]
+  · except (member) [amount] — Remove messages not sent by a member.
+  · files [amount] — Remove messages which have files.
+  · humans [amount] — Remove messages which are not from a bot.
+  · images [amount] — Remove messages which have images.
+  · invites [amount] — Remove messages which have invites.
+  · links [amount] — Remove messages which have links.
+  · mentions [amount] — Remove messages which have mentions.
+  · reactions [amount] — Remove reactions from messages.
+  · startswith (substring) [amount]
+  · stickers [amount] — Remove messages which have stickers.
+  · system [amount] — Remove system messages.
+  · voice [amount] — Remove voice messages.
+  · webhooks [amount] — Remove messages which are from a webhook.
+
+- reactionsnipe — Snipe the latest removed reaction.
+
+- reveal (channel) (target) [reason] — Unhide a channel from a member or role.
+  · all [target] [reason] — Reveal all channels to a member or role.
+
+- role (member) (role) — Add or remove a role from a member.
+  · add (member) (role) — Add a role to a member.
+  · all (role) — Add a role to all members.
+  · bots (role) — Add a role to all bots.
+  · color (role) (color) — Change a role's color.
+  · copy (source) (target) — Copy all attributes from one role to another.
+  · create [color] [hoist] (name) — Create a role.
+  · delete (role) — Delete a role.
+  · edit — Edit a role's attributes.
+  · has (role) (assign_role) — Add a role to everyone with a role.
+  · hoist (role) — Toggle if a role should appear in the sidebar.
+  · humans (role) — Add a role to all humans.
+  · icon (role) [icon] — Change a role's icon.
+  · mentionable (role) — Toggle if a role should be mentionable.
+  · remove (member) (role) — Remove a role from a member.
+  · restore (member) — Restore a member's previous roles.
+  · transfer (source) (target) — Transfer all of a member's roles to another member.
+  · · all remove (role) — Remove a role from all members.
+  · · bots remove (role) — Remove a role from all bots.
+  · · copy all (source) (target) — Copy all attributes (color, name, permissions) from one role to another.
+  · · copy color (source) (target) — Copy just the color from one role to another.
+  · · copy name (source) (target) — Copy just the name from one role to another.
+  · · copy permissions (source) (target) — Copy just the permissions from one role to another.
+  · · edit color (role) (color) — Edit a role's color.
+  · · edit hoist (role) — Toggle whether a role is displayed separately in the sidebar.
+  · · has remove (role) (remove_role) — Remove a role from everyone with a role.
+  · · humans remove (role) — Remove a role from all humans.
+
+- scan (member) — Shows all moderation history related to a user (as victim or moderator).
+
+- set — Various server related commands.
+  · banner [attachment] — Change the server's banner.
+  · icon [attachment] — Change the server's icon.
+  · name (name) — Change the server's name.
+  · notifications (option) — Change the server's default notification settings.
+  · splash [attachment] — Change the server's splash.
+  · system (channel) — Change the server's system channel.
+  · · system boost — Toggle integrated boost messages.
+  · · system welcome — Toggle integrated welcome messages.
+  · · · system welcome sticker — Toggle replying with a welcome sticker.
+
+- silence [target] [channel] — Block a user or role from sending messages and creating threads in a channel.
+  · list [channel] — View everyone silenced in a channel, or the whole server.
+
+- slowmode (channel) (delay) — Set the slowmode for a channel.
+  · disable (channel) — Disable slowmode for a channel.
+
+- snipe — Snipe the latest deleted message.
+
+- softban (member) [reason] — Softban a member (ban and unban to clear messages).
+
+- sound — Manage soundboard sounds.
+  · create (name) (file_url) — Upload a new soundboard sound.
+  · delete (name) — Delete a soundboard sound.
+  · info (name) — View info about a soundboard sound.
+  · update — Update a soundboard sound.
+  · · update emoji (name) (emoji) — Set the emoji for a soundboard sound.
+  · · update emoji_remove (name) — Remove the emoji from a soundboard sound.
+  · · update name (current_name) (new_name) — Rename a soundboard sound.
+  · · update volume (name) (volume) — Set the volume of a soundboard sound (0-100).
+
+- sounds — View all soundboard sounds in this server.
+
+- sticker
+  · add [image_url] [name] — Add a sticker to the server.
+  · archive — Archive all stickers into a zip file.
+  · delete — Delete an existing sticker.
+  · rename (name) — Rename an existing sticker.
+  · steal [name] — Steal a sticker from a message.
+  · tag — Rename all stickers to the server vanity.
+
+- strip (user) [reason] — Strip a member of all dangerous permissions.
+
+- tempban (member) [duration] [reason] — Temporarily ban a member.
+
+- thread — Commands to manage threads and forum posts.
+  · add (member) — Add a member to a thread.
+  · lock (thread) [reason] — Lock a thread or forum post.
+  · remove (thread) (member) — Remove a member from the thread.
+  · unlock (thread) [reason] — Unlock a thread or forum post.
+  · watch (thread) — Toggle a thread being watched for archival.
+  · · watch list — View all threads in the server being watched.
+
+- timeout (member) [duration] [reason] — Timeout a member in the server.
+  · list — View all timed out members.
+
+- topic (channel) (text) — Set a channel's topic.
+  · remove (channel) — Remove a channel's topic.
+
+- unban (users) [reason] — Unban a user from the server.
+  · all — Unban every banned user from the server.
+
+- unjail (member) [reason] — Unjail a member, restoring their roles.
+
+- unlockdown (channel) [reason] — Allow members to send messages.
+  · all [reason] — Allow members to send messages in all channels.
+
+- unpin (message) — Unpin a specific message.
+
+- unsilence (target) [channel] — Let a silenced user or role send messages and create threads again.
+
+- untimeout (member) [reason] — Remove timeout from a member.
+  · all — Lift all timeouts.
+
+- vcban — Manage voice channel bans.
+  · add (target) — Ban a user from joining voice channels.
+  · list — View all VC banned users.
+  · managers — Manage roles and users who can use vcban commands.
+  · remove (target) — Remove a user from vc bans.
+  · setup — Set up the vcban role and deny connect in all voice channels.
+  · · managers add (target) — Add a vcban manager.
+  · · managers remove (target) — Remove a vcban manager.
+
+- voice — Manage voice channels with various commands.
+  · deafen (member) — Deafen a user in your voice channel.
+  · deafenall — Deafen all users in your voice channel.
+  · hide — Hide your voice channel.
+  · invite (member) — Invite someone to join your voice channel.
+  · kick (member) — Kick a user from your voice channel.
+  · kickall — Kick everyone from your voice channel.
+  · limit (limit) — Set the user limit for your voice channel.
+  · list — List all users in your voice channel.
+  · lock — Lock your voice channel.
+  · mute (member) [duration] [reason] — Mute a user in your voice channel permanently or for a duration.
+  · muteall — Mute all users in your voice channel.
+  · nickall (nick) — Change the nickname of all users in your voice channel.
+  · pull (member) — Pull a user into your voice channel.
+  · rename (name) — Rename your voice channel.
+  · request (user) — Request to join someone's voice channel.
+  · status (status) — Set's voice channel status
+  · undeafen (member) — Undeafen a user in your voice channel.
+  · undeafenall — Undeafen all users in your voice channel.
+  · unhide — Unhide your voice channel.
+  · unlock — Unlock your voice channel.
+  · unmute (member) [reason] — Unmute a user in your voice channel.
+  · unmuteall — Unmute all users in your voice channel.
+
+- warn (member) [reason] — Warn a member.
+  · action
+  · clear (member) — Clear all warnings for a member.
+  · expiry [period] — Auto-delete warnings older than a set period.
+  · list (member) — View all warnings for a member.
+  · remove (case_id) [reason] — Remove a warning by case ID.
+  · · action add (action) (flags) — Add an automated action for warn thresholds.
+  · · action config — List all configured warn actions.
+  · · action list — List all available warn actions.
+  · · action remove (threshold) — Remove an automated action for a warn threshold.
+
+Additional moderation-related commands found in the full-page capture:
+
+- autopurge — Automatically delete messages in a channel once they reach a set age.
+  · list — List channels with auto-purge enabled.
+  · remove (channel) — Stop auto-purging a channel.
+  · set (channel) (duration) — Auto-delete messages in a channel once they are older than the given age.
+
+- autosnipe — Automatically snipe deleted messages in channels.
+  · channel (channel) — Set the channel where sniped messages are sent.
+  · config — View current autosnipe configuration.
+  · reset — Disable autosnipe and remove all settings.
+
+- forcenickname — Force a nickname on a member that cannot be changed.
+  · add (member) (nickname) — Force a nickname on a member.
+  · clear — Remove all forced nicknames in this server.
+  · delete (member) — Remove the forced nickname from a member.
+  · show — View all forced nicknames in this server.
+
+—> confessions (1 top-level command groups)
+====================================================
+
+- confessions — Manage the confessions system.
+  · disable — Disable confessions in this server.
+  · enable (channel) — Set the channel where confessions are posted.
+  · logs — Manage confession logging.
+  · mute (user) — Prevent a user from submitting or replying to confessions.
+  · mutelist — List all users muted from confessions.
+  · panel (channel) — Send a confession panel to a channel.
+  · reset — Reset all confession configuration for this server.
+  · unmute (user) — Allow a previously muted user to use confessions again.
+  · · logs reset — Remove the confession log channel.
+  · · logs setup (channel) — Set the channel where confession logs are sent.
+  · · logs view — Show the current confession log configuration.
+
+—> config (47 top-level command groups)
+================================================
+
+- afk (flags) — Set your AFK status with an optional reason.
+  · default [flags] — Save the reason and DM setting that a bare afk should use.
+  · emoji [emoji] — Set a custom emoji for your AFK status (Premium).
+  · format [fmt] — Set a custom AFK format. Use {emoji} {user} {reason} {since} (Premium).
+  · reset — Forget your saved AFK defaults.
+
+- alias — Manage command aliases.
+  · add (shortcut) (command) — Create a shortcut that invokes another command.
+  · list — List all command aliases in this server.
+  · remove (shortcut) — Delete an existing alias.
+  · reset — Remove all command aliases from this server.
+  · view (shortcut) — See what command a shortcut invokes.
+
+- autopublish — Automatically publish messages in announcement channels.
+  · add (channel) — Enable auto-publishing for an announcement channel.
+  · list — View all auto-publishing channels in this server.
+  · remove (channel) — Disable auto-publishing for an announcement channel.
+
+- autoreact — Manage automatic reactions for the server.
+  · add (args) — Add a reaction trigger to the guild.
+  · channel — Manage channel-based autoreact.
+  · list — View all reaction triggers in the guild.
+  · remove (trigger) — Remove a reaction trigger from the guild.
+  · reset — Remove all reaction triggers in the guild.
+  · role — Manage role-based autoreact.
+  · user — Manage user-based autoreact.
+  · · channel add (args) — Add a channel to autoreact.
+  · · channel list — View all channels in autoreact.
+  · · channel remove (channel) — Remove a channel from autoreact.
+  · · channel reset — Reset all autoreact channels in guild.
+  · · role add (args) — Add a role to role-based autoreact.
+  · · role list — View all roles in role autoreact.
+  · · role remove (role) — Remove a role from role-based autoreact.
+  · · role reset — Reset all role autoreacts in guild.
+  · · user add (args) — Add a user to user-based autoreact.
+  · · user list — View all users in user autoreact.
+  · · user remove (member) — Remove a user from user-based autoreact.
+  · · user reset — Reset all user autoreacts in guild.
+
+- autoresponder — configure autoresponders for the server.
+  · add (args) — add a new autoresponder trigger and response.
+  · allow (args) — allow a user, role, or channel for a trigger.
+  · clear — clear all autoresponders for this server.
+  · deny (args) — deny a user, role, or channel for a trigger.
+  · list — list all autoresponders for this server.
+  · permissions (trigger) — view allow/deny permissions for a trigger.
+  · remove (trigger) — remove an autoresponder by its trigger.
+  · update (args) — update an existing autoresponder's response.
+
+- autorole — set up automatic role assign on member join.
+  · all — set up automatic role assign for all members.
+  · bots — set up automatic role assign for bots.
+  · humans — set up automatic role assign for humans.
+  · · all add (role) — add an autorole for all members, assigned on join.
+  · · all clear — clear every autorole for all members in this guild.
+  · · all list — view a list of every autorole for all members.
+  · · all remove (role) — remove an autorole for all members.
+  · · bots add (role) — add an autorole for bots, assigned on join.
+  · · bots clear — clear every autorole for bots in this guild.
+  · · bots list — view a list of every autorole for bots.
+  · · bots remove (role) — remove an autorole for bots.
+  · · humans add (role) — add an autorole for humans, assigned on join.
+  · · humans clear — clear every autorole for humans in this guild.
+  · · humans list — view a list of every autorole for humans.
+  · · humans remove (role) — remove an autorole for humans.
+
+- bind — Bind a role to a keyword for quick member role toggling.
+  · add (name) (role) [category] — Bind a role to a keyword.
+  · category — Manage bind categories and their managers.
+  · list [category] — View all binds in the guild.
+  · logs [channel] — Send a log entry to a channel whenever a bind is used. Run without a channel to disable.
+  · manager [role] — Set a role that can use bind triggers. Run without a role to remove.
+  · remove (name) [category] — Remove a bind by its keyword.
+  · · category list — List all bind categories and their managers.
+  · · category manager (category) [role] — Set a role that can manage binds in a category. Run without a role to remove.
+  · · category remove (category) — Remove a category and all binds in it.
+
+- boost — Configure boost notification messages.
+  · message (code) — Manage the boost notification message.
+  · remove — Disable and remove all boost settings.
+  · set (channel) — Set the boost notification channel.
+  · settings — View current boost settings.
+  · test [channel] — Test the boost message in the configured channel.
+  · · message clear — Clear the boost message.
+  · · message view — Preview the boost message.
+
+- boosterrole — Boosterrole Commands
+  · allow — Allow non-boosters to create booster roles.
+  · award — Give roles to members when they boost.
+  · base (role) — Set the base role for where boost roles will be positioned under.
+  · blacklist — Blacklist users or words from boosterroles.
+  · blacklisted — View blacklisted users and words.
+  · color (color) — Change your booster role color. Specify a hex color or multiple colors for a gradient (separated by commas).
+  · create (name) — Create your booster role. Optionally specify a hex color or multiple colors for a gradient (separated by commas) before or after the name.
+  · delete — Delete your booster role.
+  · icon [icon] — Set your booster role icon.
+  · limit (limit) — Set the max number of booster roles that can be created.
+  · list — View all booster roles in this server.
+  · name (name) — Rename your booster role.
+  · reset — Disable Boosterrole system in your server.
+  · setup — Enable Boosterrole system in your server.
+  · share — Share your booster role with others.
+  · unblacklist — Remove users or words from the blacklist.
+  · wipe (user) — Wipe a member's booster role.
+  · · allow add (user) — Allow a user without boosting.
+  · · allow list — List all users allowed to create booster roles.
+  · · allow remove (user) — Remove a user from the allow list.
+  · · award add (role) — Add a role to give on boost.
+  · · award list — List all award roles.
+  · · award remove (role) — Remove an award role.
+  · · blacklist user (user) [reason] — Blacklist a member from using boosterroles.
+  · · blacklist word (words) — Blacklist a word from boosterrole names.
+  · · blacklisted user — List all blacklisted users.
+  · · blacklisted word — List all blacklisted words.
+  · · share add (user) — Share your booster role with a member.
+  · · share disable — Disable sharing your booster role.
+  · · share enable — Enable sharing your booster role.
+  · · share limit (limit) — Limit how many members you can share with.
+  · · share list — List all members you're sharing your booster role with.
+  · · share remove (user) — Stop sharing your booster role with a member.
+  · · unblacklist user (user) — Unblacklist a member.
+  · · unblacklist word (words) — Unblacklist a word.
+
+- boosts — View your active boosts.
+
+- buttonmessage — Add buttons that send embed responses when clicked.
+  · add (message) (label) [style] (embed_code) — Add a button that sends an embed response when clicked.
+  · list — View all button messages in this server.
+  · remove (code) — Remove a button message by its code.
+
+- buttonrole — Manage self-assignable roles via buttons.
+  · add (message) (label) (role) [style] [emoji] — Add a button role to a message.
+  · list — View all button roles in this server.
+  · remove (code) — Remove a button role by its code.
+
+- channel [channel] — Show stats for a specific channel.
+  · messages [channel] — Per-channel message stats with dual-axis chart.
+
+- channelinfo [channel] — View information about a channel.
+
+- customcommand — create and manage server-specific custom commands.
+  · allow (name) (target) — allow a user, role, or channel to use a custom command.
+  · deny (name) (target) — deny a user, role, or channel from using a custom command.
+  · disable (name) — disable a custom command without deleting it.
+  · enable (name) — re-enable a disabled custom command.
+  · list — list all custom commands for this server.
+  · preview (name) [sample_args] — preview a custom command's rendered output.
+  · remove (name) — delete a custom command.
+  · requireperm (name) (perms) — require a Discord permission to use a custom command, or 'clear' to remove.
+  · restrictions (name) [action] — view a custom command's restrictions, or 'clear' to reset them.
+  · set (args) — create or update a custom command.
+  · show (name) — show a custom command's saved definition.
+  · unallow (name) (target) — remove an explicit allow entry from a custom command.
+  · undeny (name) (target) — remove a deny entry from a custom command.
+
+- embed — Create and manage custom embeds.
+  · clone (message) (channel) — Clone an embed from a message to another channel.
+  · copy (message) — Copy an embed from a message as embed code.
+  · create (channel) (code) — Create a new embed and send it to a channel.
+  · delete (name) — Delete a saved embed template.
+  · edit (message) (code) — Edit an existing embed message.
+  · import (channel) (json_data) — Import a JSON embed and send it to a channel.
+  · list — List saved embed templates for this server.
+  · rename (old_name) (new_name) — Rename a saved embed template.
+  · save (name) (code) — Save TagScript embed code as a named template.
+  · send (args) — Send a saved embed template to a channel.
+  · wizard (name) — Open an interactive embed builder and save it as a reusable template.
+
+- goodbye — Configure goodbye messages for leaving members.
+  · message (code) — Manage the goodbye message.
+  · remove — Disable and remove all goodbye settings.
+  · set (channel) — Set the goodbye channel.
+  · settings — View current goodbye settings.
+  · test [channel] — Test the goodbye message in the configured channel.
+  · · message clear — Clear the goodbye message.
+  · · message view — Preview the goodbye message.
+
+- invite — Get the bot's invite link.
+
+- inviteinfo (invite) — View information about an invite.
+
+- invites [member] — Returns the number of invites you have in the server
+  · add (member) (field) (amount) — Add to one of a member's invite counters.
+  · bonus — Manage the bonus invites for the server
+  · code [member] — Display all of your or a user's invite codes
+  · disable — Disable the invite tracker
+  · enable — Enable invite tracking for the server
+  · fake-threshold (threshold) — Set the fake invite threshold for the server
+  · invited [member] — Returns a list where all users are listed who got invited by the provided user
+  · inviter [member] — Show who invited the user to the server
+  · leaderboard — Show the invite leaderboard for the server
+  · logs (channel) — Set the channel for the invite logs
+  · message (message) — Set the message for the invite tracker
+  · remove (member) (field) (amount) — Remove from one of a member's invite counters.
+  · reset [member] — Reset your own invites, another member's, or every member's (manage server only).
+  · revoke [invite_link] — Revoke a single invite or clear all server invites
+  · rewards — Manage the invite rewards for the server
+  · set (member) (field) (amount) — Set one of a member's invite counters to an exact amount.
+  · · bonus add (member) (bonus) — Add bonus invites to a user
+  · · bonus remove (member) (bonus) — Remove bonus invites from a user
+  · · rewards add (threshold) (role) — Add a role reward for the invite tracker
+  · · rewards list — List all the role rewards for the invite tracker
+  · · rewards remove (threshold) — Remove a role reward for the invite tracker
+  · · rewards stack (option) — Toggle stacking of invite rewards
+  · · rewards sync — Sync the role rewards with the current invites
+
+- joindm — Send a DM to members when they join the server.
+  · disable — Disable join DMs for this server.
+  · enable — Enable join DMs for this server.
+  · message (code) — Manage the join DM message.
+  · · message clear — Clear the join DM message.
+  · · message view — Preview the join DM message.
+
+- joinposition [member] — View a member's join position.
+
+- language — View or change this server's language for bot responses.
+  · reset — Reset this server's language back to English.
+  · set [language] — Set this server's language for bot responses.
+
+- logging — Configure server event logging.
+  · add (event) (channel) — Add logging for specific events.
+  · ignore — Manage the logging ignore list.
+  · list — List all configured logging channels.
+  · panel — Open the interactive logging configuration panel.
+  · remove (event) — Remove logging for specific events.
+  · setup [category] — Set up logging channels in a category or open the logging panel.
+  · · add all (channel) — Set all logging events to one channel.
+  · · ignore add (target) — Add a user, role or channel to the logging ignore list.
+  · · ignore list — View the logging ignore list.
+  · · ignore remove (target) — Remove a user, role or channel from the logging ignore list.
+  · · remove all — Stop logging all events.
+
+- panel — Create a music control panel.
+  · personal [level] — Summon a personal music panel that only you can control.
+  · remove — Remove this server's master music panel.
+  · server [level] — Post a shared music panel for the whole server (requires Manage Server).
+  · setup — Guided setup for a music control panel (personal or server).
+
+- pingonjoin — Ping new members when they join in a channel.
+  · add (channel) — Set the channel to ping new members in.
+  · clear — Reset join ping message to default ping.
+  · edit (code) — Set a custom message for join pings.
+  · onboarding (toggle) — Hold the join ping until the member finishes onboarding.
+  · remove — Disable join pings for this server.
+  · view — View the current join ping configuration.
+
+- poll (question) — Create a poll with reactions.
+
+- quickpoll (question) — Create a quick yes/no poll.
+
+- reactionrole — Manage self-assignable roles via reactions.
+  · add (message) (emoji) (role) — Add a reaction role to a message.
+  · clear — Remove all reaction roles from the guild.
+  · list — View all reaction roles in the guild.
+  · remove (message) (emoji) — Remove a reaction role from a message.
+  · removeall (message) — Remove all reaction roles from a message.
+
+- reactiontest — Test your reaction speed
+
+- recentjoins — View members who recently joined the server (last 24h).
+
+- roleinfo [role] — View information about a role.
+
+- rolelink — Automatically grant a linked role when a member receives a trigger role.
+  · add (trigger) (linked) — Link two roles: getting the trigger role also grants the linked role.
+  · list — List all role links in this server.
+  · remove (trigger) (linked) — Remove a role link.
+
+- server — Show a full overview of this server's activity stats.
+
+- serveravatar [member] — Get the server's icon.
+
+- serverbanner — Get the server's banner.
+
+- servericon — Get the server's icon.
+
+- serverinfo — Shows you information about the server.
+
+- stickymessage — Manage sticky messages for channels.
+  · add (channel) (message) — Set a sticky message for a channel.
+  · list — View all sticky messages in this server.
+  · remove (channel) — Remove the sticky message from a channel.
+
+- suggest [suggestion] — Submit a suggestion to the server.
+  · anonymous [state] — Toggle anonymous suggestions.
+  · approve (suggestion_id) [reason] — Approve a suggestion.
+  · channel (channel) — Set the channel where suggestions are posted.
+  · consider (suggestion_id) [reason] — Mark a suggestion as under consideration.
+  · deny (suggestion_id) [reason] — Deny a suggestion.
+  · disable — Disable the suggestions system.
+  · enable — Enable the suggestions system.
+  · reset — Remove the suggestions configuration.
+  · thread [state] — Toggle thread creation for suggestions.
+
+- tag — Reward your members with exclusive roles when they adopt your server's tag.
+  · channel (channel) — Set the channel for BOTH of the messages (revoke & addition messages).
+  · disable — Disable exclusive server tag rewards for your server.
+  · enable — Enable exclusive server tag rewards for the server.
+  · ignore [member] — Ignore a member from getting the server tag reward.
+  · message [message] — Set a custom message for whenever a member uses the server tag.
+  · reset — Reset the server tag reward settings for your server.
+  · revoke [message] — Set a custom message when the bot revokes the role from the member.
+  · reward — Reward members that use your server tag with a role.
+  · settings — View the current settings for exclusive server tag rewards.
+  · · ignore clear — Clear every member that's being ignored.
+  · · ignore remove (member) — Allow a member to get the server tag reward.
+  · · ignore role [role] — Ignore members that have a specific role from getting server tag rewards.
+  · · ignore view — View the members that are ignored from getting server tag rewards.
+  · · message channel (channel) — Set the channel for the bot to send the message to.
+  · · message clear — Clear the custom server tag message you've set.
+  · · message disable — Disallow the bot from sending a message when a member uses the server tag.
+  · · message enable — Allow the bot to send a message when a member uses the server tag.
+  · · message view — View the custom server tag message you've set.
+  · · revoke channel (channel) — Set the channel to send the revoke message to.
+  · · revoke clear — Clear the custom revoke message that you've set.
+  · · revoke disable — Disallow the bot from sending a message when a member stops using the server tag.
+  · · revoke enable — Allow the bot to send a message when a member stops using the server tag.
+  · · revoke view — View the revoke message you've set.
+  · · reward add (role) — Add a role as a server tag reward.
+  · · reward clear — Clear every server tag reward that's been added.
+  · · reward remove (role) — Remove a role from being a server tag reward.
+  · · reward view — View the reward role that you've added.
+  · · · ignore role clear — Clear every role that's being ignored.
+  · · · ignore role remove (role) — Allow members with a role to get server tag rewards.
+  · · · ignore role view — View the roles that are currently being ignored.
+
+- ticket — Ticket commands.
+  · admin — Manage ticket admins.
+  · admins — View ticket admins on your server.
+  · allow (target) — Add a user or role to the current ticket.
+  · allowed — List all members and roles with explicit access in this ticket.
+  · blacklist (user) [reason] — Blacklist a member from creating tickets.
+  · blacklisted — List all blacklisted users from creating tickets.
+  · claim — Claim the current ticket.
+  · claiming — Configure the ticket claiming system.
+  · close — Close the current ticket.
+  · closerequest — Request to close the current ticket.
+  · config — Check the server's ticket settings.
+  · forms — Manage reusable ticket forms.
+  · info (user) — View all tickets from a given user.
+  · leaderboard — View the ticket leaderboard.
+  · limit (limit) — Set the maximum number of tickets a user can have open.
+  · list — List all open tickets in this server.
+  · modal — Modify modals for ticket topics.
+  · move (name) — Move the ticket to another category.
+  · option — Extended option (topic) management.
+  · panel — Manage per-panel configuration.
+  · panelconfig — Manage panel configurations (panel_configs).
+  · priority [priority] — Set the priority of the current ticket.
+  · profile — View or edit your own ticket staff profile.
+  · profiles — Admin: manage ticket staff profiles.
+  · remind [reason] — Remind the ticket owner.
+  · rename (name) — Rename the current ticket channel.
+  · resend [channel] — Resend the ticket panel to a channel.
+  · reset — Disable the ticket system for this server.
+  · role — Manage the ticket owner role.
+  · send [channel] [code] — Send the ticket panel to a channel.
+  · settings — Configure the ticket system.
+  · setup — Setup the ticket system interactively.
+  · stats [member] — Show ticket statistics for the server or a specific member.
+  · support — Manage the support roles for the ticket system.
+  · topic — Manage the ticket topics.
+  · topics — View all ticket topics with pagination.
+  · unallow (target) — Remove a user or role from the current ticket.
+  · unblacklist (user) — Unblacklist a member from creating tickets.
+  · unclaim — Unclaim the current ticket.
+  · · admin add (member) — Give a user ticket admin permissions.
+  · · admin remove (member) — Remove a user's ticket admin permissions.
+  · · claiming disable — Disable the ticket claiming system.
+  · · claiming enable — Enable the ticket claiming system.
+  · · claiming private — Set the ticket claiming system to private.
+  · · claiming public — Set the ticket claiming system to public.
+  · · forms attach (topic) (form_name) — Attach a form to a topic.
+  · · forms create (name) — Create a new reusable form.
+  · · forms delete (name) — Delete a form.
+  · · forms detach (topic) — Detach the form from a topic.
+  · · forms field — Manage individual fields in a form.
+  · · forms fields (name) — List all fields in a form.
+  · · forms filtering (name) (toggle) — Toggle filtering_enabled on a form.
+  · · forms list — List all forms in this server.
+  · · forms rename (old) (new) — Rename a form.
+  · · forms title (name) (title) — Set the modal title of a form.
+  · · modal add (topic) (name) [description] — Add a modal field to a ticket topic.
+  · · modal description (topic) (name) (description) — Edit the placeholder text of a modal field.
+  · · modal list — List all modal fields for all topics.
+  · · modal name (topic) (old) (new) — Rename a modal field.
+  · · modal remove (topic) (name) — Remove a modal field from a ticket topic.
+  · · modal toggle (topic) (name) — Toggle a modal field on or off.
+  · · modal type (topic) (name) (field_type) — Change the type of a modal field.
+  · · option autoclose (topic) (duration) — Set auto-close duration for a topic (e.g. 24h, 0 to disable).
+  · · option autodelete (topic) (duration) — Set auto-delete duration after close for a topic.
+  · · option claimrename (topic) (template) — Set the channel rename template when a ticket is claimed.
+  · · option closecategory (topic) (category) — Set the category tickets move to when closed (per topic).
+  · · option closerename (topic) (template) — Set the channel rename template when a ticket is closed.
+  · · option creator (topic) (toggle) — Toggle whether the creator can close their own ticket.
+  · · option disable (topic) — Disable a topic so it cannot be selected.
+  · · option enable (topic) — Re-enable a disabled topic.
+  · · option inactivity (topic) (duration) — Set the inactivity reminder duration for a topic.
+  · · option keepvisible (topic) (toggle) — Toggle keeping the creator visible after claim.
+  · · option leave (topic) (toggle) — Toggle auto-close when the ticket creator leaves the server.
+  · · option namingformat (topic) (format) — Override the channel name format for a topic.
+  · · option required — Manage required roles for a topic.
+  · · option staffspeak (topic) (toggle) — Toggle whether staff can speak after someone else claims.
+  · · option staffvisible (topic) (toggle) — Toggle keeping staff visible when a ticket is claimed.
+  · · option takeovers (topic) (toggle) — Toggle whether claim takeovers are allowed.
+  · · option trainee — Manage trainee settings for a topic.
+  · · panel category (channel) (category) — Set the default open category for tickets from this panel.
+  · · panel claiming (channel) (option) — Override claiming on or off for this panel.
+  · · panel config [channel] — View configuration for the panel in a channel.
+  · · panel limit (channel) (limit) — Override the max open tickets per user for this panel.
+  · · panel list — List all ticket panels in this server.
+  · · panel pin (channel) (option) — Auto-pin the opening message in tickets from this panel.
+  · · panelconfig category (name) (category) — Set the default category for a panel config.
+  · · panelconfig channel (name) (channel) — Set the channel for a panel config.
+  · · panelconfig claiming (name) (toggle) — Enable or disable claiming for a panel config.
+  · · panelconfig create (name) — Create a new panel configuration.
+  · · panelconfig delete (name) — Delete a panel configuration.
+  · · panelconfig list — List all panel configurations.
+  · · panelconfig maxopen (name) (n) — Set the max open tickets per user for a panel config.
+  · · panelconfig mode (name) (mode) — Set the display mode for a panel config.
+  · · panelconfig send (name) [channel] — Send the panel to its configured channel (or a specified one).
+  · · profile clear — Reset all your profile overrides.
+  · · profile disable — Disable your ticket staff profile.
+  · · profile enable — Enable your ticket staff profile.
+  · · profile set — Set your profile overrides.
+  · · profiles clear (user) — Clear all profile overrides for a user.
+  · · profiles disable (user) — Disable a user's ticket profile.
+  · · profiles enable (user) — Enable a user's ticket profile.
+  · · profiles list — List all staff profiles in this server.
+  · · profiles toggle — Toggle server-wide profiles feature on or off.
+  · · profiles view (user) — View a specific user's ticket profile.
+  · · role remove — Remove the ticket owner role.
+  · · role set (role) — Set a role as the ticket owner role.
+  · · settings category (topic) (category) — Configure the category where tickets should open.
+  · · settings claiming (option) — Enable or disable the ticket claiming system.
+  · · settings closed (category) — Configure the category for closed tickets.
+  · · settings counting (option) — Enable or disable the ticket counting system.
+  · · settings embed (topic) (code) — Set the opening embed for a ticket topic.
+  · · settings global (category) — Set the global default category for tickets without a topic category.
+  · · settings inactivity [hours] — Set the inactivity duration (in hours) after which tickets auto-close. Use 0 to disable.
+  · · settings logs (channel) — Configure the channel for logging ticket transcripts.
+  · · settings reset — Disable the ticket module in this server.
+  · · settings supportrole (action) (role) — Add or remove a global support role.
+  · · support add (topic) (role) — Add a support role to a ticket topic.
+  · · support list — List all support roles for the ticket system.
+  · · support remove (topic) (role) — Remove a support role from a ticket topic.
+  · · topic add (name) — Create a ticket topic.
+  · · topic admin — Manage per-topic admin roles.
+  · · topic channelname (name) (channelname) — Edit a ticket topic's channel name template.
+  · · topic channeltopic (name) (channeltopic) — Edit a ticket topic's channel topic.
+  · · topic claimeffect (name) (effect) — Set what happens to the channel when a staff member claims a ticket.
+  · · topic closed (name) (category) — Set the category tickets move to when closed (per topic).
+  · · topic description (name) (description) — Edit a ticket topic's description.
+  · · topic emoji (name) (emoji) — Edit a ticket topic's emoji.
+  · · topic formanswers (name) — Toggle whether form answers are shown in the ticket channel.
+  · · topic name (old) (new) — Edit a ticket topic's name.
+  · · topic naming (name) (pattern) — Set the channel naming pattern for a ticket topic.
+  · · topic permissions (name) (close) (delete) — Set close/delete permissions for a ticket topic.
+  · · topic remove (name) — Delete a ticket topic.
+  · · topic status (name) (option) — Enable or disable a ticket topic.
+  · · topic weight (name) (weight) — Edit a ticket topic's sort weight (higher = shown first).
+  · · · forms field add (form_name) (label) (key) [field_type] [required] — Add a field to a form.
+  · · · forms field remove (form_name) (key) — Remove a field from a form by key.
+  · · · option required add (topic) (role) — Add a required role to a topic.
+  · · · option required all (topic) (toggle) — Toggle whether all required roles must be present (vs any).
+  · · · option required remove (topic) (role) — Remove a required role from a topic.
+  · · · option trainee add (topic) (role) — Add a trainee role to a topic.
+  · · · option trainee claim (topic) (toggle) — Toggle whether trainees can claim tickets in a topic.
+  · · · option trainee close (topic) (toggle) — Toggle whether trainees can close tickets in a topic.
+  · · · option trainee remove (topic) (role) — Remove a trainee role from a topic.
+  · · · option trainee speak (topic) (toggle) — Toggle whether trainees can speak in tickets for a topic.
+  · · · profile set category (category) — Set your personal claim category override.
+  · · · profile set message (code) — Set your personal claim message override.
+  · · · profile set rename (template) — Set your personal claim rename template.
+  · · · topic admin add (name) (role) — Add an admin role to a topic.
+  · · · topic admin remove (name) (role) — Remove an admin role from a topic.
+
+- timer — Manage recurring scheduled messages.
+  · add (channel) (interval) (message) — Schedule a recurring message in a channel.
+  · list — View all active timers and their next scheduled run time.
+  · remove (index) — Remove a timer by its index from the list.
+
+- timezone [member] — View your local time
+  · remove — Remove your local timezone.
+  · set (timezone) — Set your local timezone.
+
+- translate [destination] [text] — Translate text with Google Translate.
+
+- webhook — Manage webhooks for channels.
+  · avatar (argument) — Change a webhook's avatar. Attach an image or pass a link.
+  · create (channel) [name] — Create a webhook in a channel.
+  · delete (name) — Delete a webhook by name.
+  · forward (source) (destination) — Forward messages from one channel to another via webhook.
+  · name (current_name) (new_name) — Change a webhook's name.
+  · send (name) (code) — Send a message/embed to a webhook by name.
+  · view — View all webhooks managed by Slug in this server.
+
+- welcome — Configure greet messages for new members.
+  · clear — Remove every greet message configured in this server.
+  · default (channel) (toggle) — Toggle sending a random default wave sticker when no custom greet message is set.
+  · list — List every channel that has a greet message configured.
+  · setup (channel) [code] — Add or replace a greet message for a channel. Omit the message to use the default sticker.
+  · unset (channel) — Remove the greet message for a specific channel.
+  · view (channel) — Preview the greet message configured for a channel.
+
+—> donor (2 top-level command groups)
+==============================================
+
+- model [model] — Choose which AI model your ;ai command uses (donator).
+
+- premium — View your donor tier and manage your guild slots.
+  · add [guild_id] — Slot one of your guilds to receive your tier's perks.
+  · info — Show your tier, expiry, and slot usage.
+  · remove [guild_id] — Free one of your guild slots.
+  · slots — List the guilds your tier is currently sponsoring.
+
+—> economy (54 top-level command groups)
+=================================================
+
+- balance [member] — Check your or someone's balance.
+
+- bank — Manage bank connections with other users.
+  · connect (member) — Send a bank connection request to a friend.
+  · connections — View your bank connections.
+  · disconnect (member) — Disconnect a bank connection.
+  · upgrade (amount) — Pay to permanently increase your card limit.
+
+- beg — Beg for some loose change.
+
+- blackjack (bet) — Play Blackjack ��� beat the dealer without busting.
+
+- business — Run your business empire.
+  · buy (name) — Buy a specific business by name.
+  · collect (owner) (business_name) — Manager: collect a business you manage for someone else.
+  · fire (member) (business_name) — Fire a manager from a business.
+  · hire (member) [commission] (business_name) — Hire a friend as manager for a business.
+  · info [name] — Show info on one of your businesses.
+  · list — List businesses you can buy.
+  · managers — List managers across your businesses.
+  · sell (name) — Sell a business (50% refund).
+  · upgrade (name) — Upgrade a business tier (boosts earnings).
+
+- collectall — Collect all pending income.
+
+- company — Manage your company ��� create, invite, deposit, upgrade.
+  · accept (invite_id) — Accept a company invitation.
+  · create (name) — Found a new company.
+  · decline (invite_id) — Decline a company invitation.
+  · demote (member) — Demote an officer back to member (CEO only).
+  · deposit (amount) — Deposit dallars into the company vault.
+  · disband — Disband your company (CEO only). Returns 50% of vault.
+  · info [name] — Show a company's info card.
+  · invite (member) — Invite a user to your company (CEO/officer only).
+  · invites — List your pending company invites.
+  · leave — Leave your current company.
+  · promote (member) — Promote a member to officer (CEO only).
+  · public — Toggle public-join mode (CEO only).
+  · remove — Remove a member from your company (CEO/officer only).
+  · rename (new_name) — Rename your company (CEO only).
+  · setdesc (description) — Set company description (CEO/officer).
+  · top — View top companies by networth.
+  · transfer (member) — Transfer CEO role to another member (CEO only).
+  · upgrade — Upgrade your company's stage (CEO only, costs vault funds).
+  · vote — Submit your weekly company vote (boosts reputation).
+  · withdraw (amount) — Withdraw from the company vault (CEO only).
+
+- craft — Craft items and sell them.
+
+- credits — View your AI credits, model, and refill time.
+
+- crime — Commit a crime. High risk, high reward.
+
+- crypto (crypto) [cur] — Checks the current price of the specified cryptocurrency.
+
+- daily — Claim your daily reward.
+
+- deposit (amount) — Deposit Dallars into your bank.
+
+- econ — Economy hub ��� profile + admin.
+  · config — Open the admin panel for the economy.
+  · giveaway — Show giveaway status.
+  · participate — Opt into the support-server giveaway.
+  · profile [member] — View your economy profile.
+  · reset — Reset all guild economy settings to defaults.
+  · title [title] — Set the title shown on your profile (must be earned). Pass 'clear' to remove.
+  · unparticipate — Opt out of the support-server giveaway.
+  · · giveaway force-draw — Run the draw immediately. Bot owner only.
+  · · giveaway history — Recent giveaway draws (paginated).
+  · · giveaway pause — Pause the giveaway loop. Bot owner only.
+  · · giveaway resume — Resume the giveaway loop. Bot owner only.
+
+- fish — Cast your line and catch fish.
+
+- forage — Forage for herbs and berries.
+
+- gang — View information about your gang
+  · color (color) — Set your gang's custom embed color
+  · create (name) — Create a new gang
+  · disband — Disband your gang
+  · invite (member) — Invite someone to your gang
+  · join (gang_id) — Request to join a gang by ID
+  · leave — Leave your current gang
+  · members — View members of your gang
+  · promote (member) — Promote a member to admin
+  · remove (member) — Remove/Kick a member from the gang
+  · setbanner (url) — Set your gang's banner
+  · slogan (slogan) — Set your gang's custom slogan
+  · transfer (member) — Transfer gang ownership
+
+- harvest — Harvest crops from your garden.
+
+- heist — Start a multi-player heist. Crew up, split the score.
+
+- house — Buy, upgrade, and manage your house.
+  · buy (tier) — Buy a house at the given tier.
+  · joint (partner) — Add a partner as co-owner of your house.
+  · sell — Sell your house back for 60% of the tier price.
+  · upgrade (tier) — Upgrade your house to a higher tier (pays the difference).
+  · view [member] — View your house and storage.
+
+- hunt — Go hunting for animals.
+
+- inventory [member] — View your inventory.
+
+- invest — Run your investment portfolio.
+  · buy (investment_type) — Buy into an investment.
+  · claim (investment_id) — Claim a matured investment by ID.
+  · collect — Claim every matured investment in one shot.
+  · hot — Show today's hot-pick investment.
+  · info — View only your active investments, with claim/withdraw controls.
+  · list — List all available investment offers.
+  · withdraw (investment_id) — Withdraw an investment early (keeps 80% of cost).
+
+- job — View available jobs or your current job.
+  · apply (job_id) — Apply for a job.
+  · quit — Quit your current job.
+
+- keno (bet) — Pick 5 numbers from 1���20. Match more, win more.
+
+- leaderboard — View the richest users.
+
+- level [member] — View your level and XP progress.
+  · booster (multiplier) — Set the XP multiplier for server boosters.
+  · channel [channel] — Set or clear the channel for level-up notifications.
+  · chat — Manage chat XP leveling independently.
+  · config — View the current leveling configuration.
+  · disable — Disable the leveling system for this server.
+  · enable — Enable the leveling system for this server.
+  · ignore — Manage the XP ignore list.
+  · leaderboard — View the level leaderboard.
+  · merge (option) — Toggle whether Voice XP merges into Text XP or stays separated.
+  · message (code) — Configure a custom level-up embed.
+  · multiplier (multiplier) — Set the global XP multiplier.
+  · multipliers — List all active XP multipliers.
+  · reset [target] — Reset levels for one member, or for the entire server when no member is given.
+  · rewards — Manage level reward roles.
+  · rolemultiplier — Manage per-role XP multipliers.
+  · set (member) (lvl) [kind] — Set a member's level directly and grant the matching rewards.
+  · toggle — Toggle the leveling system on or off.
+  · toprole — Give a role to the #1 XP member.
+  · voice — Configure voice leveling.
+  · · chat disable — Disable chat XP leveling for this server.
+  · · chat enable — Enable chat XP leveling for this server.
+  · · chat toggle — Toggle chat XP leveling on or off.
+  · · ignore add (target)
+  · · ignore commands (option)
+  · · ignore list
+  · · ignore remove (target)
+  · · message reset — Reset the custom level-up embed.
+  · · message test — Send a test level-up notification using your current data.
+  · · message view — Preview the current level-up embed.
+  · · rewards add (level) (role)
+  · · rewards list
+  · · rewards remove (role)
+  · · rewards reset — Reset all level reward roles.
+  · · rewards stack [option]
+  · · rewards sticky (role) (toggle) — Keep a specific reward role once earned, even with stacking off.
+  · · rewards sync — Give all members the roles they've earned based on their current level.
+  · · rolemultiplier add (role) (multiplier)
+  · · rolemultiplier remove (role)
+  · · toprole disable — Disable the top-XP role feature.
+  · · toprole set (role) — Enable the top-XP role feature.
+  · · voice afk (option) — Toggle ignoring the AFK voice channel.
+  · · voice channel [channel] — Set or clear the channel for voice level-up notifications.
+  · · voice deafened (option) — Toggle ignoring self-deafened members.
+  · · voice disable — Disable voice leveling.
+  · · voice enable — Enable voice leveling.
+  · · voice interval (seconds) — Set the voice XP tick interval (seconds).
+  · · voice leaderboard — View the voice level leaderboard.
+  · · voice minmembers (amount) — Require N members in a voice channel to earn voice XP.
+  · · voice muted (option) — Toggle ignoring self-muted members.
+  · · voice streaming (option) — Toggle ignoring streaming members.
+  · · voice xp (amount) — Set voice XP awarded per interval.
+
+- loot — Open a random loot box.
+
+- lottery — View and participate in active lotteries.
+  · end (lottery_id) — End a lottery early and draw a winner.
+  · info (lottery_id) — Show details on a lottery (active or past).
+  · start (name) (duration) (tiers) — Start a new lottery.
+
+- mine — Mine for ores and gems.
+
+- mines (bet) — Mines ��� reveal gems for multipliers, avoid the bombs.
+
+- monthly — Claim your monthly reward.
+
+- networth [member] — View total net worth including shares.
+
+- pay (member) (amount) — Send Dallars to another user.
+
+- pickpocket — Pickpocket a random NPC. Risky!
+
+- prison — Check your prison status.
+
+- quest — View and manage your active quests.
+  · achievements [member] — View your unlocked achievements.
+  · coop — Co-op quests with a friend.
+  · leaderboard — See who's claimed the most quests.
+  · list — List every quest id grouped by rarity.
+  · panel — Open the quest panel (same as `,quest`).
+  · reroll [slot] — Use a quest scroll to re-roll a daily/weekly/special quest.
+  · server — Manage server-wide quests.
+  · view (quest_id) — View details on a specific quest by id.
+  · · coop accept (coop_id) — Accept a co-op quest invitation by ID.
+  · · coop claim (coop_id) — Claim your co-op quest reward by ID.
+  · · coop invite (member) (quest_id) — Invite a friend to a co-op quest.
+  · · coop list — List your co-op quests.
+  · · server end — (Admin) End the active server quest and pay out rewards.
+  · · server info — Show the active server quest progress.
+  · · server start [quest_id] — (Admin) Start a server-wide quest.
+
+- rep (member) — Give a rep to another user (24h cooldown).
+
+- reputation [member] — View your or someone else's reputation.
+
+- rob (member) — Attempt to rob another user.
+
+- roleshop — Server role shop ��� buy roles with in-game currency.
+  · add (role) (price) [description] — Add a role to the shop (admin only).
+  · buy (role) — Buy a role from the shop.
+  · edit (role) [price] [description] — Edit a listing's price or description (admin only).
+  · list — Browse roles available for purchase.
+  · remove (role) — Remove a role from the shop (admin only).
+  · stock (role) (stock) — Set the stock for a role listing (admin only). Use `0` for unlimited.
+
+- roulette (bet) — Bet on color or parity at the roulette wheel.
+
+- scavenge — Scavenge for electronic parts.
+
+- scratch (bet) — Scratch a card ��� pick three tiles, hope for big symbols.
+
+- serverbank — Server-run bank ��� propose, lend, borrow.
+  · approve — Approve the pending bank proposal (mod-only).
+  · default (member) — Force-default an overdue borrower (manager/cashier only).
+  · deposit (amount) — Deposit money into your account at the bank.
+  · fire (member) — Remove a staff member (manager-only).
+  · hire (member) (role) — Hire a member as bank manager or cashier (manager-only).
+  · loan (amount) (days) — Take a loan from the server bank ��� staff approval required for big amounts.
+  · propose (name) — Propose a new server bank ��� needs 3 mod approvals.
+  · rename (name) — Rename your server's bank (owner-only).
+  · repay — Repay your outstanding bank loan.
+  · status — Show this server's bank.
+  · transfer (member) — Transfer bank ownership to another manager ��� they must accept.
+  · withdraw (amount) — Withdraw your deposits.
+
+- shares — View available guild shares.
+  · book [guild_id] — View the top of the order book for a guild's shares.
+  · buy [amount] [guild_id] — Buy shares of a guild.
+  · cancel (order_id) — Cancel one of your open share orders by id.
+  · delist — Remove your server's shares from the market.
+  · dividend — Claim your share dividends.
+  · history [guild_id] — View price history for a guild's shares.
+  · info [guild_id] — View detailed info about a guild's shares (with chart).
+  · list [base_price] [name] — List your server's shares on the market.
+  · order — Place limit buy/sell orders against the shares order book.
+  · orders — List your open share orders.
+  · portfolio [member] — View your share portfolio.
+  · rename (name) — Rename your server's share ticker.
+  · sell [amount] [guild_id] — Sell shares of a guild.
+  · setdesc (description) — Set a description for your server's shares.
+  · setprice (price) — Set base price for shares.
+  · setrate (rate) — Set dividend rate (0.001 ��� 0.01).
+  · top [guild_id] — View top shareholders for a guild.
+  · trades [member] — View recent share trades.
+  · · order buy (amount) (max_price) [guild_id] — Place a limit buy order ��� fills at or below your max price.
+  · · order sell (amount) (min_price) [guild_id] — Place a limit sell order ��� fills at or above your min price.
+
+- shop — Browse the item shop.
+  · buy (item_name) [quantity] — Buy an item from the shop.
+  · gift (member) (item_name) [quantity] — Gift an item to another user.
+  · info (item_name) — View detailed information about an item.
+  · sell (item_name) [quantity] — Sell an item back to the shop (50% value).
+
+- slots (bet) — Spin the slot machine.
+
+- transactions [member] — View recent transactions.
+
+- treasure — Go on a treasure hunt.
+
+- useitem (item_name) — Use an item from your inventory.
+
+- weekly — Claim your weekly reward.
+
+- withdraw (amount) — Withdraw Dallars from your bank.
+
+- work — Work a shift. Earnings stack in pending salary, claim with collect.
+
+—> esports (4 top-level command groups)
+================================================
+
+- fortnite — Fortnite lookups.
+  · item (name) — Look up a Fortnite cosmetic by name.
+  · shop — Show daily shop rotation.
+
+- scrim — Automated scrim registration & slotlists.
+  · ban (member) [scrim_id] [reason] — Ban a user from a scrim.
+  · close [scrim_id] — Close registration now.
+  · create (flags) — Create a scrim.
+  · delete (scrim_id) — Delete a scrim.
+  · format [text] — Set, view, or use presets for registration format template.
+  · info [scrim_id] — View detailed information and status of a scrim.
+  · list — List this server's scrims.
+  · open [scrim_id] — Open registration now.
+  · removeslot (num) [scrim_id] — Remove a registered team from a slot.
+  · slot [scrim_id] — View and manage scrim slots.
+  · slotlist [scrim_id] — Post the slotlist now.
+  · toggle [scrim_id] — Enable/disable a scrim's daily auto-open.
+  · unban (member) [scrim_id] — Unban a user from a scrim.
+  · · slot list [scrim_id] — View all registered teams and their slot assignments.
+  · · slot post [scrim_id] — Post the scrim slotlist.
+  · · slot remove (num) [scrim_id] — Remove a registered team from a slot.
+
+- tourney — Automated tournament registration & slot management.
+  · ban (member) [tourney_id] [reason] — Ban a user from a tournament.
+  · close [tourney_id] — Close registration now.
+  · create (flags) — Create a tournament.
+  · delete (tourney_id) — Delete a tournament.
+  · format [text] — Set, view, or use presets for registration format template.
+  · groups [tourney_id] — Post the group lists.
+  · info [tourney_id] — View detailed information and status of a tournament.
+  · list — List this server's tournaments.
+  · open [tourney_id] — Open registration now.
+  · removeslot (num) [tourney_id] — Remove a registered team from a slot.
+  · slot [tourney_id] — View and manage tournament slots.
+  · slotmanager [tourney_id] — Post the slot-manager panel.
+  · toggle [tourney_id] — Enable/disable a tournament.
+  · unban (member) [tourney_id] — Unban a user from a tournament.
+  · · slot list [tourney_id] — View all registered teams and their slot assignments.
+  · · slot manager [tourney_id] — Post the interactive slot manager panel.
+  · · slot remove (num) [tourney_id] — Remove a registered team from a slot.
+
+- valorant [username] — Valorant account integration ��� profile lookup, store, nightmarket, search.
+  · agent (name) — Look up a Valorant agent ��� role, abilities and lore.
+  · expire — Show when your authenticated Riot session expires.
+  · login — Authenticate your Riot Games account with slug.
+  · logout — Disconnect your authenticated Riot Games account.
+  · matches [size] — Show your recent Valorant matches.
+  · nightmarket — View your Valorant night market when active.
+  · search (query) — Search for a Valorant skin by name.
+  · shop — View your daily Valorant shop.
+  · skin (query) — Preview a Valorant skin ��� its levels, variants and VFX.
+
+—> family (10 top-level command groups)
+================================================
+
+- adopt (target) — Adopt another user as your child.
+
+- children [target] — Show a user's children.
+
+- disown [target] — Disown one of your children.
+
+- divorce [target] — Divorce one of your partners.
+
+- emancipate — Remove your parent.
+
+- familysize [target] — How many people are in a user's family tree.
+
+- makeparent (target) — Ask another user to be your parent.
+
+- parent [target] — Show a user's parent.
+
+- propose (target) — Propose marriage to another user.
+
+- relationship (first) [second] — Show how two users are related.
+
+—> feeds (2 top-level command groups)
+==============================================
+
+- feed [member] — open up here comes the airplane
+
+- feeds — Social feed notifications.
+  · instagram — Instagram feed notifications.
+  · reddit — Reddit post notifications.
+  · tiktok — TikTok feed notifications.
+  · twitch — Twitch live notifications.
+  · youtube — YouTube feed notifications.
+  · · instagram add (channel) (username) — Subscribe to an Instagram handle's posts and reels.
+  · · instagram list — List all Instagram feeds in this server.
+  · · instagram message (username) (content) — Set a custom message sent with Instagram notifications.
+  · · instagram remove (channel) (username) — Unsubscribe from an Instagram user.
+  · · reddit add (channel) (subreddit) — Get notified when a subreddit has new posts.
+  · · reddit list — List all Reddit feeds in this server.
+  · · reddit message (subreddit) (content) — Set a custom message sent with Reddit post notifications.
+  · · reddit remove (channel) (subreddit) — Stop getting notified for a subreddit.
+  · · tiktok add (channel) (username) — Subscribe to a TikTok handle's posts.
+  · · tiktok list — List all TikTok feeds in this server.
+  · · tiktok message (username) (content) — Set a custom message sent with TikTok notifications.
+  · · tiktok remove (channel) (username) — Unsubscribe from a TikTok user.
+  · · twitch add (channel) (username) — Get notified when a Twitch streamer goes live.
+  · · twitch list — List all Twitch feeds in this server.
+  · · twitch message (username) (content) — Set a custom message sent when a streamer goes live.
+  · · twitch remove (channel) (username) — Stop getting notified for a Twitch streamer.
+  · · youtube add (channel) (username) — Subscribe to a YouTube channel's uploads.
+  · · youtube list — List all YouTube feeds in this server.
+  · · youtube message (username) (content) — Set a custom message sent with YouTube notifications.
+  · · youtube remove (channel) (username) — Unsubscribe from a YouTube channel.
+
+—> fun (19 top-level command groups)
+=============================================
+
+- 2048 — Play a game of 2048
+
+- adventure — Go on an adventure.
+
+- battleship (member) — Play a game of Battleship with someone
+
+- chess (player) — Play a game of chess with someone
+
+- choose (choices) — Give me choices and I will pick one for you.
+
+- coinflip (bet) — Flip a coin ��� heads or tails?
+
+- connect4 (member) — Play a game of Connect Four with someone
+
+- dice (bet) — Stake-style dice ��� pick over/under, multiplier scales with your odds.
+
+- game (title) — Returns information about the specified game title given.
+
+- gif [url] — Convert a video to a GIF.
+
+- randomhex — Generate a random hex (color).
+
+- spin [member] — round and round we go
+
+- tenor (keyword) — Search Tenor for a GIF
+
+- tictactoe (member) — Play a game of tictactoe with someone
+  · leaderboard [scope] — View the TicTacToe leaderboard (add 'global' for all servers).
+  · stats [member] — View TicTacToe win/loss stats.
+
+- typeracer — Start a typerace in the channel
+
+- urban (term) — Look up a term on Urban Dictionary.
+
+- wikihow (query) — How to...?
+
+- wordle — Play a game of Wordle
+
+- wouldyourather — Would you rather?
+
+—> lastfm (1 top-level command groups)
+===============================================
+
+- lastfm
+  · artist (artist) — view artist info.
+  · collage [member] [options] — Build a grid of your most-listened album covers.
+  · compare (member1) [member2] — compare two users.
+  · count [member] — Show your total Last.fm scrobbles.
+  · crown (artist) — check who owns the crown for an artist.
+  · crowns [member] — List your crowns in this server.
+  · embed — configure your nowplaying embed.
+  · favorites [member] — View your Last.fm loved tracks.
+  · global — view global top tracks.
+  · globalwhoknows (artist) — Top global listeners for an artist.
+  · globalwkalbum (query) — Top global listeners for an album.
+  · globalwktrack (query) — Top global listeners for a track.
+  · hide — Hide yourself from whoknows in this server.
+  · login — Connect your LastFM account via OAuth.
+  · milestone (number) — Show what track was your N-th scrobble.
+  · mostcrowns — Members with the most crowns in this server.
+  · nowplaying [member] — Shows your currently playing track on LastFM.
+  · plays [member] [artist] — Show your artist playcount.
+  · playsalbum [member] [query] — Show your playcount for a specific album.
+  · playsall [member] [query] — Show your playcount for every track on an album.
+  · playstrack [member] [query] — Show your playcount for a specific track.
+  · recent [member] — view recent tracks.
+  · recentfor (artist) — Recent scrobbles filtered to an artist.
+  · remove — unset your LastFM account.
+  · score [member] — Show a summary of your Last.fm stats.
+  · set (username) — Set your LastFM username directly.
+  · streak [member] — Show your current listening streak.
+  · topalbums [member] — View your most-listened albums.
+  · topartists [member] — view top artists.
+  · toptenalbums [member] [artist] — Top 10 albums for an artist.
+  · toptentracks [member] [artist] — Top 10 tracks for an artist.
+  · toptracks [member] — view top tracks.
+  · user [member] — view user info.
+  · whois [member] — View Last.fm profile info.
+  · whoknows [artist] — who knows an artist.
+  · wkalbum (query) — Who knows an album in this server.
+  · wktrack (query) — Who knows a track in this server.
+  · · embed reset — remove your custom nowplaying embed.
+  · · embed set (code) — set a custom nowplaying embed using tagscript.
+  · · embed view — preview your custom nowplaying embed.
+  · · hide list — List all hidden members.
+
+—> manipulation (19 top-level command groups)
+======================================================
+
+- copyembed (message) — Copy a script from a message.
+
+- createembed (response) — Create a custom embed using TagScript.
+
+- edit
+  · accent [color] — Set the bot's embed accent color in your slotted guild (Premium).
+  · avatar (url)
+  · banner (url)
+  · bio (text)
+  · currency [name] — Rename the eco currency in your slotted guild (Premium).
+  · emoji (kind) [emoji] — Set a custom context emoji (approve/deny/warn/info) in your slotted guild (Premium).
+  · gaccent [color] — Set your personal global embed accent color (Apex). Applies across every server.
+  · name (name)
+  · reset [kind] — Reset my server profile. Pass a field to reset just one, or no arg to reset all.
+
+- firstmessage — View the first message sent.
+
+- impersonate (member) (content)
+
+- invoke — configure custom embed messages for moderation commands.
+  · ban — configure custom embed for ban command.
+  · hardban — configure custom embed for hardban command.
+  · jail — configure custom embed for jail command.
+  · kick — configure custom embed for kick command.
+  · softban — configure custom embed for softban command.
+  · timeout — configure custom embed for timeout command.
+  · unban — configure custom embed for unban command.
+  · unjail — configure custom embed for unjail command.
+  · untimeout — configure custom embed for unmute command.
+  · warn — configure custom embed for warn command.
+  · · ban dm (code) — Configure the custom DM embed for ban.
+  · · ban message (code) — Configure the custom message embed for ban.
+  · · hardban dm (code) — Configure the custom DM embed for hardban.
+  · · hardban message (code) — Configure the custom message embed for hardban.
+  · · jail dm (code) — Configure the custom DM embed for jail.
+  · · jail message (code) — Configure the custom message embed for jail.
+  · · kick dm (code) — Configure the custom DM embed for kick.
+  · · kick message (code) — Configure the custom message embed for kick.
+  · · softban dm (code) — Configure the custom DM embed for softban.
+  · · softban message (code) — Configure the custom message embed for softban.
+  · · timeout dm (code) — configure the custom DM embed for timeout.
+  · · timeout message (code) — Configure the custom message embed for timeout.
+  · · unban dm (code) — Configure the custom DM embed for unban.
+  · · unban message (code) — Configure the custom message embed for unban.
+  · · unjail dm (code) — Configure the custom DM embed for unjail.
+  · · unjail message (code) — Configure the custom message embed for unjail.
+  · · untimeout dm (code) — Configure the custom DM embed for unmute.
+  · · untimeout message (code) — Configure the custom message embed for unmute.
+  · · warn dm (code) — Configure the custom DM embed for warn.
+  · · warn message (code) — Configure the custom message embed for warn.
+  · · · ban dm reset — reset the custom DM embed.
+  · · · ban dm view — view the custom DM embed.
+  · · · ban message reset — reset the custom message embed.
+  · · · ban message view — view the custom message embed.
+  · · · hardban dm reset — reset the custom DM embed.
+  · · · hardban dm view — view the custom DM embed.
+  · · · hardban message reset — reset the custom message embed.
+  · · · hardban message view — view the custom message embed.
+  · · · jail dm reset — reset the custom DM embed.
+  · · · jail dm view — view the custom DM embed.
+  · · · jail message reset — reset the custom message embed.
+  · · · jail message view — view the custom message embed.
+  · · · kick dm reset — reset the custom DM embed.
+  · · · kick dm view — view the custom DM embed.
+  · · · kick message reset — reset the custom message embed.
+  · · · kick message view — view the custom message embed.
+  · · · softban dm reset — reset the custom DM embed.
+  · · · softban dm view — view the custom DM embed.
+  · · · softban message reset — reset the custom message embed.
+  · · · softban message view — view the custom message embed.
+  · · · timeout dm reset — reset the custom DM embed.
+  · · · timeout dm view — view the custom DM embed.
+  · · · timeout message reset — reset the custom message embed.
+  · · · unban dm reset — reset the custom DM embed.
+  · · · unban dm view — view the custom DM embed.
+  · · · unban message reset — reset the custom message embed.
+  · · · unban message view — view the custom message embed.
+  · · · unjail dm reset — reset the custom DM embed.
+  · · · unjail dm view — view the custom DM embed.
+  · · · unjail message reset — reset the custom message embed.
+  · · · unjail message view — view the custom message embed.
+  · · · untimeout dm reset — reset the custom DM embed.
+  · · · untimeout dm view — view the custom DM embed.
+  · · · untimeout message reset — reset the custom message embed.
+  · · · untimeout message view — view the custom message embed.
+  · · · warn dm reset — reset the custom DM embed.
+  · · · warn dm view — view the custom DM embed.
+  · · · warn message reset — reset the custom message embed.
+  · · · warn message view — view the custom message embed.
+
+- moveto (channel) — Move the bot from its current voice channel to another.
+
+- myembed — Save and reuse your own personal embeds anywhere.
+  · delete (name) — Delete one of your saved embeds.
+  · list — List your saved embeds.
+  · save (name) (code) — Save personal embed code under a name.
+  · send (name) — Send one of your saved embeds.
+
+- open — Create your economy account to start earning.
+
+- pagination — Manage paginated embed panels.
+  · add (name) (script) — Add a page to a pagination panel.
+  · create (name) — Create a new pagination panel.
+  · delete (name) — Delete a pagination panel and all its pages.
+  · list — List all pagination panels in this server.
+  · remove (name) (page) — Remove a page from a pagination panel.
+  · reset — Delete all pagination panels from this server.
+  · send (name) (channel) — Send a pagination panel to a channel.
+
+- reskin
+  · avatar [url]
+  · disable — Disable the reskin feature
+  · enable — Enable the reskin feature
+  · preset [name] — Apply an Apex-exclusive curated reskin identity.
+  · username (username)
+
+- restrictcommand (command) (role) — Only allows people with a certain role to use a command.
+  · add (command) (role) — Allows the specified role exclusive permission to use a command.
+  · list [option] — View a list of every restricted command.
+  · remove (command) (role) — Removes the specified role's exclusive permission to use a command.
+  · reset — Removes every restricted command in this server.
+
+- reverse [file] — Reverse search an image for its source.
+
+- rmi — Reset your own invites in this server.
+
+- run [member] — i wanna run awaaaay!
+
+- tm (name) — Move the ticket to another category.
+
+- tree [target] — Show a user's blood-relative family tree.
+
+- treefile [target] — Export a family tree
+
+- trn (name) — Rename the current ticket channel.
+
+—> minecraft (1 top-level command groups)
+==================================================
+
+- minecraft — Minecraft server tools.
+  · availability (name) — Check whether a Minecraft username is available.
+  · ban (player) [reason] — Ban a player from the server (RCON).
+  · bridge — Live Minecraft ��� Discord bridge via the Slug plugin.
+  · cmd (command_line) — Run a raw RCON command.
+  · coords [name] — Saved coordinates.
+  · default (name) — Set the default server used when no name is given.
+  · edit (name) (address) — Edit the address of a registered server.
+  · ip [name] — Show connection info for a server.
+  · kick (player) [reason] — Kick a player from the server (RCON).
+  · list — List all Minecraft servers configured in this guild.
+  · mods [server_name] — List mods for a server.
+  · namehistory (ign) — Look up username history (Mojang removed this endpoint in 2022 ��� links to NameMC).
+  · online [name] — Who is currently online.
+  · ping [name] — Show latency to a server.
+  · player (ign) — Look up a Minecraft player.
+  · profile (ign) — Show a player's NameMC profile URL.
+  · rcon (name) (rcon_address) (password) — Store RCON credentials for a server.
+  · recipe (item) — Look up a crafting recipe on the wiki.
+  · remove (name) — Delete a registered server.
+  · setup (name) (address) — Register a Minecraft server for this guild.
+  · skins (ign) — Links to a player's current skin (3D body, head, download).
+  · status [name] — Ping a server and show status + player count.
+  · unban (player) — Unban a player from the server (RCON).
+  · whitelist — Manage the whitelist.
+  · wiki (query) — Search the Minecraft Wiki.
+  · · bridge channel (event) (channel) — Route a bridge event (chat | joins | deaths | console) to a channel.
+  · · bridge execute (command_line) — Execute a command in-game through the bridge (admin only).
+  · · bridge plugin — Generate the jar + token your server owner drops into plugins/.
+  · · bridge rotate — Rotate the plugin token (invalidates the current one).
+  · · bridge say (message) — Relay a message into in-game chat via the bridge.
+  · · bridge unset (event) — Stop forwarding a bridge event.
+  · · coords add (name) (x) (y) (z) [dimension] [server_name] — Save a coordinate.
+  · · coords delete (name) [server_name] — Delete a saved coordinate.
+  · · coords list [server_name] — List all saved coordinates for this server.
+  · · mods add (name) [url] [required] [description] — Add a mod to the server's mod list.
+  · · mods remove (name) — Remove a mod from the mod list.
+  · · whitelist add (player) — Add a player to the whitelist.
+  · · whitelist list — List whitelisted players.
+  · · whitelist remove (player) — Remove a player from the whitelist.
+
+—> miscellaneous (90 top-level command groups)
+=======================================================
+
+- about — View information about the bot.
+
+- achievements — View your unlocked achievements.
+
+- affiliate — Manage affiliate tracking and view affiliate stats.
+  · channel (channel) — Set the affiliate channel.
+  · disable — Disable affiliate tracking.
+  · enable — Enable affiliate tracking.
+  · leaderboard — View the server's affiliate leaderboard.
+  · message (message) — Set the affiliate thank-you message. Use `default` to reset.
+  · roles [role1] [role2] [role3] — Restrict affiliate tracking to up to 3 roles. Leave empty to track everyone.
+  · stats [member] — View affiliate stats for yourself or another member.
+  · test — Send a preview of the affiliate message using your own stats.
+  · variables — Show supported variables for affiliate messages.
+  · xprate (amount) — Set the XP earned per valid affiliate post.
+
+- ai (prompt) — Ask an AI model a question.
+  · chat [channel] — Set a channel as an AI chatbot channel.
+
+- application — Set up member application forms.
+  · create (name) — Create a new application form.
+  · delete (name) — Delete an application form.
+  · list — List all application forms.
+  · log (name) (channel) — Set the channel where approve/reject decisions are logged.
+  · manage (name) — Open the interactive question builder for a form.
+  · message (name) (code) — Set the form's panel message. Plain text or full embed code (like createembed).
+  · option — Customize how a form appears in the apply picker.
+  · panel (channel) [name] — Post an apply panel to a channel. Pass a form name for a single-form panel.
+  · resubmit (name) (mode) — Set how often members can re-apply (unlimited/pending/once).
+  · review (name) (channel) — Set the channel where submissions are sent for review.
+  · role (name) (role) — Set the role granted to applicants on approval.
+  · settings (name) — Show a form's current configuration and a live preview.
+  · toggle (name) — Enable or disable a form (disabled forms can't be applied to).
+  · · option description (name) (description) — Set the form's sub-text in the apply picker (supports TagScript variables).
+  · · option emoji (name) (emoji) — Set the form's emoji in the apply picker. Use 'none' to clear.
+  · · option label (name) (label) — Set the form's label in the apply picker (supports TagScript variables).
+  · · panel message (code) — Set the all-forms picker panel's message. Plain text or embed code; 'reset' to clear.
+
+- apply — Apply for one of this server's applications.
+
+- autopfp — Automatically send pfps to a channel.
+  · add (channel) (category) — Add an autopfp channel.
+  · avatar (category) [avatar] — Change the way how the bot webhook is avatar.
+  · name (category) (name) — Change the way how the bot webhook is named.
+  · remove (category) — Remove an autopfp channel.
+  · reset — Remove all autopfp configurations for this server.
+
+- avatar [member] — Get a user's avatar.
+
+- backup — Manage server backups (roles, channels, settings).
+  · auto [state] — Toggle weekly auto-backup for this server (admin).
+  · create [name] — Snapshot the server. Opens a component picker.
+  · delete (backup_id) — Delete one of your backups.
+  · info (backup_id) — Show details for one of your backups.
+  · list — List your backups across all servers.
+  · load (backup_id) — Apply one of your backups to this server. Target server owner only.
+  · status — Show progress for the active backup load in this server.
+
+- bail [member] — Pay bail to get out of jail (or bail out a friend).
+
+- banner [member] — Get a user's banner.
+
+- birthday [member] — Manage birthdays for server members.
+  · channel (channel) — Set the channel for birthday announcements.
+  · disable — Disable birthday announcements for this server.
+  · enable — Enable birthday announcements for this server.
+  · message — Manage the announcement messages for birthdays.
+  · role — Manage roles assigned on a member's birthday.
+  · set (date) — Set your birthday.
+  · settings — View current birthday settings.
+  · time (when) — Set the announcement time (24h, server time).
+  · · message age (message) — Set the announcement message for members with their age.
+  · · message base (message) — Set the base announcement message for members.
+  · · role add (role) — Add a role to assign on a member's birthday.
+  · · role remove (role) — Remove a birthday role.
+
+- blacktea — Play a game of BlackTea
+  · leaderboard [scope] — View the BlackTea leaderboard (add 'global' for all servers).
+  · stats [member] — View BlackTea win/loss stats.
+
+- book (search) — Search for book information
+
+- boomer — View the oldest member in the server.
+
+- bored [member] — entertain me or perish
+
+- bump — Configure Disboard bump reminders and notifications.
+  · channel — Manage the channel where bump reminders are sent.
+  · message (code) — Manage the bump reminder message.
+  · remove — Disable and remove all bump settings.
+  · role [role] — Manage the role assigned to members who bump.
+  · set (channel) — Set the bump reminder channel.
+  · thank (code) — Manage the thank-you message sent after a bump.
+  · · channel remove — Remove the bump reminder channel.
+  · · message clear — Clear the bump reminder message.
+  · · message view — Preview the bump reminder message.
+  · · role remove — Remove the bump role.
+  · · thank clear — Clear the bump thank-you message.
+  · · thank view — Preview the bump thank-you message.
+
+- character (search) — Search AniList for a character
+
+- charinfo (characters) — View unicode characters.
+
+- chop — Chop trees for wood.
+
+- cleargnames — Clear the guild name history.
+
+- color [value] — See the color of a user or hex code.
+
+- commands — Get the link to the bot's commands page.
+
+- convert (amount) (from_currency) (to_currency) — Convert an amount between two currencies (e.g., 100 USDT to INR).
+
+- cooldown — See every command cooldown and passive earner ready time.
+
+- countryguess — Guess the country from its outline
+
+- crash (bet) — Cash out before the multiplier crashes.
+
+- current — Show detailed info about the current track.
+
+- definition (word) — Get the definition of a word.
+
+- devices [member] — View a member's platforms.
+
+- dig — Dig around for hidden items.
+
+- disable — Manage disabled commands and modules in this server.
+  · commands — Manage disabled commands in this server.
+  · modules — Manage disabled modules in this server.
+  · · commands add (command) — Disable a command in this server.
+  · · commands remove (command) — Re-enable a previously disabled command.
+  · · modules add (module) — Disable an entire module in this server.
+  · · modules remove (module) — Re-enable a previously disabled module.
+
+- disconnect — Disconnect the bot from the voice channel.
+
+- discover — Manage this server's discovery listing
+  · bump — Bump the server on the discovery page
+  · delete — Remove this server from the discovery listing
+
+- dns (domain) — Perform a DNS lookup for a domain.
+
+- docs — Get the link to the bot's documentation.
+
+- download (url) — Download media from TikTok, Instagram, Twitter/X, Pinterest, or Reddit (Premium).
+
+- flagguess [difficulty] — Guess the country by its flag
+
+- fyp — Get a random video from TikTok FYP / trending.
+
+- gallery — Restrict channels to media-only (images/videos).
+  · add (channel) — Make a channel gallery-only.
+  · ignore — Manage who is exempt from gallery enforcement.
+  · punishment (channel) (punishment) — Set the punishment for sending non-media in a gallery channel.
+  · remove (channel) — Remove gallery restriction from a channel.
+  · reset — Remove all gallery channels from this server.
+  · view — View all gallery channels in this server.
+  · · ignore clear — Clear the entire gallery ignore list.
+  · · ignore list — View all roles and users on the gallery ignore list.
+  · · ignore remove (target) — Remove a role or user from the gallery ignore list.
+  · · ignore role (role) — Toggle a role on the gallery ignore list.
+  · · ignore user (member) — Toggle a user on the gallery ignore list.
+
+- gender [gender] — Set your gender so family relationships show as mother/father, son/daughter, etc. Optional.
+
+- giveaway — Manage giveaways in your server
+  · create (channel) (time) (winners) (prize) (flags) — Start a giveaway with your provided duration, winners and prize description
+  · delete (message) — Delete a giveaway
+  · edit — Edit a giveaway's settings
+  · end (message) — End an active giveaway early
+  · list — List all giveaways in the server
+  · requirements — Manage a giveaway's requirements
+  · reroll (message) [winners] — Reroll a specified number of winners for the giveaway
+  · · edit duration (message) (duration) — Edit the duration of a giveaway
+  · · edit host (message) (host) — Edit the host of a giveaway
+  · · edit price (message) (price) — Edit the prize of a giveaway
+  · · edit winners (message) (winners) — Edit the number of winners of a giveaway
+  · · requirements add (message) (flag) (input) — Add a new requirement to the giveaway
+  · · requirements edit (message) (flag) (input) — Edit an existing requirement in the giveaway
+  · · requirements remove (message) (flag) — Remove a requirement from the giveaway
+
+- gnames (guild) — View a guild's name history.
+
+- hash — Hash a string with a given algorithm.
+  · sha1 (text) — Hash a string with the SHA1 algorithm.
+  · sha224 (text) — Hash a string with the SHA224 algorithm.
+  · sha256 (text) — Hash a string with the SHA256 algorithm.
+  · sha384 (text) — Hash a string with the SHA384 algorithm.
+  · sha512 (text) — Hash a string with the SHA512 algorithm.
+  · xxh128 (text) — Hash a string with the XXH128 algorithm.
+  · xxh32 (text) — Hash a string with the XXH32 algorithm.
+  · xxh64 (text) — Hash a string with the XXH64 algorithm.
+
+- host
+  · clear
+  · delete (image_id)
+  · gallery
+  · upload [image] (flags)
+
+- image — Image manipulation commands.
+  · 3d [url] — Render your image with a 3D effect.
+  · abstract [url] — Apply an abstract art filter to your image.
+  · ace [url] — Apply an ace card effect to your image.
+  · ads [url] — Put your image on an advertisement billboard.
+  · balls [url] — Make your image bounce as animated balls.
+  · bayer [url] — Apply a Bayer dithering pattern to your image.
+  · bevel [url] — Add a bevel depth effect to your image.
+  · billboard [url] — Place your image on a real billboard.
+  · blocks [url] — Fragment your image into animated blocks.
+  · bloom [url] [strength] — Apply a bloom glow effect to an image.
+  · blur [url] — Blur your image.
+  · boil [url] — Make your image look like it's boiling.
+  · bomb [url] — Explode your image with a bomb effect.
+  · bonks [url] — Bonk the image with a hammer.
+  · bubble [url] — Wrap your image inside a floating bubble.
+  · burn [url] — Burn your image at the edges.
+  · canny [url] — Apply Canny edge detection to your image.
+  · caption [url] (text) — Add a white caption bar above an image.
+  · cartoon [url] — Turn your image into a cartoon.
+  · cinema [url] — Add a cinematic letterbox to your image.
+  · clock [url] — Display your image on a clock face.
+  · cloth [url] — Make your image wave like cloth.
+  · console [url] — Display your image on a console screen.
+  · contour [url] — Apply a contour line effect to your image.
+  · cow [url] — Put your image on a cow pattern.
+  · cracks [url] — Shatter your image with cracks.
+  · cube [url] — Wrap your image onto a rotating 3D cube.
+  · deepfry [url] — Deep fry an image with extreme contrast and noise.
+  · dilate [url] — Apply a morphological dilation to your image.
+  · dither [url] — Apply a dithering effect to your image.
+  · dizzy [url] — Make your image spin and look dizzy.
+  · dots [url] — Turn your image into a halftone dot pattern.
+  · earthquake [url] — Make your image shake like an earthquake.
+  · emojify [url] — Convert your image into an emoji mosaic.
+  · endless [url] — Create an endless zoom loop with your image.
+  · equations [url] — Overlay mathematical equations on your image.
+  · explicit [url] — Add an explicit content warning overlay to your image.
+  · fall [url] — Make your image fall to pieces.
+  · fan [url] — Spread your image open like a fan.
+  · fire [url] — Set your image on fire.
+  · fisheye [url] — Apply a fisheye lens distortion to an image.
+  · flag [url] — Make your image wave like a flag.
+  · flush [url] — Flush your image down a toilet.
+  · gallery [url] — Display your image in a gallery frame.
+  · gameboy_camera [url] — Make your image look like a Game Boy Camera photo.
+  · glitch [url] — Apply a glitch distortion to your image.
+  · globe [url] — Wrap your image around a spinning globe.
+  · grayscale [url] — Convert an image to grayscale.
+  · half_invert [url] — Invert the top half of your image.
+  · heart [url] — Create an animated heart GIF with your image.
+  · heart_diffraction [url] — Apply a heart diffraction light effect to your image.
+  · heart_locket [url] — Place your image inside a heart locket.
+  · infinity [url] — Create an infinite mirror loop with your image.
+  · invert [url] — Invert the colors of an image.
+  · ipcam [url] — Make your image look like an IP camera feed.
+  · kanye [url] — Add Kanye West to your image.
+  · knit [url] — Make your image look like it's knitted.
+  · lamp [url] — Light your image with an animated lamp effect.
+  · laundry [url] — Wash your image in a laundry machine.
+  · layers [url] — Stack your image in multiple animated layers.
+  · letters [url] — Turn your image into ASCII letter art.
+  · lines [url] — Overlay animated lines across your image.
+  · logoff [url] — Make your image appear on a Windows logoff screen.
+  · lsd [url] — Apply a trippy LSD color effect to your image.
+  · magik [url] — Apply a liquid rescale distortion to your image.
+  · magnify [url] — Apply a magnifying glass zoom effect to your image.
+  · matrix [url] — Apply a Matrix digital rain effect to your image.
+  · melt [url] — Melt your image downward.
+  · meme [url] (text) — Add impact-font text above and below an image.
+  · minecraft [url] — Turn your image into a Minecraft pixel art scene.
+  · motivate [url] (text) — Create a motivational poster meme.
+  · neon [url] — Apply a neon glow effect to your image.
+  · optics [url] — Apply an optical lens distortion to your image.
+  · painting [url] — Turn your image into an oil painting.
+  · paparazzi [url] — Surround your image with paparazzi cameras.
+  · patpat [url] — Pat the image with an animated hand.
+  · pattern [url] — Tile your image into a repeating pattern.
+  · phase [url] — Apply a phase shift color effect to your image.
+  · phone [url] — Display your image on a phone screen.
+  · pixelate [url] [strength] — Pixelate an image.
+  · pizza [url] — Put your image on a pizza.
+  · plank [url] — Make the image walk the plank.
+  · plates [url] — Smash your image into animated plates.
+  · poly [url] — Convert your image into a low-poly art style.
+  · print [url] — Make your image look like it's being printed.
+  · pyramid [url] — Wrap your image onto a rotating pyramid.
+  · quarter [url] — Split your image into four spinning quarters.
+  · radiate [url] — Make your image radiate light outward.
+  · rain [url] — Add an animated rain effect over your image.
+  · rainbow [url] — Apply an animated rainbow color overlay to an image.
+  · reflection [url] — Add a water reflection below your image.
+  · reverse [url] — Reverse the frames of a GIF.
+  · ripped [url] — Rip your image in half.
+  · ripple [url] — Apply an animated water ripple to your image.
+  · roll [url] — Roll your image up like a scroll.
+  · scramble [url] — Randomize the frames of a GIF.
+  · scrapbook [url] — Display your image as a scrapbook cutout.
+  · sensitive [url] — Add a sensitive content blur overlay to your image.
+  · shear [url] — Shear your image diagonally.
+  · shine [url] — Add an animated light sweep to your image.
+  · shock [url] — Apply an electricity shock effect to your image.
+  · shoot [url] — Shoot a bullet through your image.
+  · shred [url] — Shred your image like paper.
+  · slice [url] — Slice your image into strips.
+  · soap [url] — Cover your image in animated soap bubbles.
+  · speechbubble [url] — Add a speech bubble above an image.
+  · speed [url] [multiplier] — Change the playback speed of a GIF.
+  · spikes [url] — Add color spikes radiating from your image.
+  · spin [url] — Create a rotating GIF of your image.
+  · spread [url] [strength] — Apply a paint spread filter to an image.
+  · stereo [url] — Apply an anaglyph 3D stereo effect to your image.
+  · stretch [url] — Stretch your image vertically.
+  · swirl [url] [strength] — Apply an animated swirl distortion to an image.
+  · tiles [url] — Tile your image into an animated grid.
+  · tv [url] — Display your image on a TV screen.
+  · wall [url] — Tile your image across a brick wall.
+  · warp [url] — Warp and distort your image.
+  · wave [url] — Apply an animated wave distortion to your image.
+  · wiggle [url] — Make your image wiggle back and forth.
+  · wormhole [url] — Create a wormhole tunnel animation with your image.
+  · zonk [url] — Apply a zonk smash effect to your image.
+  · zoom [url] — Create an animated zoom-in GIF from an image.
+  · zoomblur [url] — Apply a zoom blur effect to an image.
+
+- imagine (prompt) — Generate an image from a text prompt using AI (donator).
+
+- img (query) — Search images on DuckDuckGo (safe mode).
+
+- info — Show overall server statistics, including message and voice activity. Updated in real-time as you send messages or join/leave voice channels.
+  · user [user] — Show your message and voice activity. Updated in real-time as you send messages or join/leave voice channels.
+
+- lab — Manage your laboratory.
+  · ampoules (amount) — Buy ampoules for your lab.
+  · info — View your laboratory status.
+  · upgrade — Upgrade your lab level.
+
+- lappillow [member] — best pillow in the world ngl
+
+- liked — View and manage your liked songs.
+  · list — View all your liked songs.
+  · play — Play all your liked songs
+  · remove (position) — Remove a song from your liked songs.
+
+- list
+  · admins — View members with administrator permission.
+  · banlist — View all banned members.
+  · boosters — View server boosters.
+  · bots — View all bots in the server.
+  · emojis — View all server emojis.
+  · guildinvites — View all server invites
+  · inrole (role) — View members which have a role.
+  · invc — View invite counts per user.
+  · noroles — View members with no roles.
+  · roles — View the server roles.
+  · stickers — View all server stickers.
+  · · boosters lost — View all lost boosters.
+
+- lookup (query) — Browse recently released usernames by length, or dropped vanities.
+
+- loop [mode] — Loop the current track or queue.
+
+- me — Show your own message and voice activity stats.
+
+- memberbanner [member] — View a user's server banner.
+
+- nod [member] — yes. absolutely. agreed. mhm.
+
+- ocr [url] — Extract text from an image.
+
+- ocrtr [url] [to_language] — Detect text in an image and translate to a desired language.
+
+- oldest — View the oldest Discord account in the server.
+
+- partner [target] — Show a user's partner(s).
+
+- patrol — Patrol the streets for reward.
+
+- ping — Check the bot's latency.
+
+- police — Police force commands.
+  · arrest (suspect) — Arrest a suspect with an outstanding crime alert.
+  · channel (channel) — Set the police alert channel (manage server only).
+  · join — Join the server police force.
+  · leave — Leave the server police force.
+  · list — List active officers in this server.
+
+- pulse — Configure the live activity leaderboard.
+  · channel (board) [channel] — Scope a leaderboard to a single channel, or clear the scope with no channel.
+  · disable — Pause leaderboard updates without deleting the messages.
+  · enable — Resume leaderboard updates.
+  · period (period) — Choose the timeframe shown on the posted leaderboards.
+  · set [channel] [flags] — Set the channel for live leaderboards, or create one automatically.
+
+- quote [text] — Turn a message into a quote card. Reply to a message or pass text directly.
+
+- react (message) (emoji) — Add a reaction to a message.
+
+- reminder
+  · add (time) (reminder) — Add a reminder.
+You can have up to 3 active reminders at once.
+  · clear — Remove all your active reminders.
+  · list — List your active reminders.
+  · remove (index) — Remove a reminder by its number.
+
+- rps (bet) — Rock paper scissors against the bot.
+
+- search — Search around for spare change.
+
+- shards — View information about the bot's shards.
+
+- source [source] — Set your preferred music source.
+
+- starboard — Manage starboard channels.
+  · create (name) (channel) (emoji) [threshold] — Create a new starboard.
+  · delete (name) — Delete a starboard by name.
+  · emoji (action) (name) (emoji) — Add or remove a trigger emoji on a board.
+  · exception — Manage exceptions for a starboard.
+  · list — List all starboards.
+  · · exception add (name) (target) — Add an exception to a starboard.
+  · · exception remove (name) (target) — Remove an exception from a starboard.
+
+- support — Get the link to the bot's support server.
+
+- tableflip [member] — (������������������� ���������
+
+- tc — Close the current ticket.
+
+- timediff (first) (second) — Find the time difference between any two Discord IDs.
+
+- tower (bet) — Climb the tower ��� every floor multiplies, falls cost everything.
+
+- tts — Text-to-speech for voice channels.
+  · autojoin (value) — Toggle whether the bot reads messages from the configured channel.
+  · channel (channel) — Set the channel the bot reads messages from.
+  · pickvoice — Pick a TTS voice from a paginated dropdown.
+  · rate (rate) — Set the speech rate in words per minute.
+  · reset (field) — Reset a TTS setting (channel, voice, rate, autojoin, or all).
+  · say (text) — Speak text in your voice channel.
+  · settings — Show the current TTS configuration.
+  · voice (language) — Set the TTS voice / language by name or id.
+
+- unsplash (search) — Search Unsplash for an image
+
+- uploader — Manage the uploader system in your server.
+  · break — Manage uploader breaks.
+  · config (role) — Manage uploader settings.
+  · hire (user) — Hire a user as an uploader.
+  · layout — Manage layouts.
+  · leaderboard — View the uploader leaderboard.
+  · points — Manage uploader points.
+  · profile [user] — View an uploader's profile.
+  · reviewask — Ask the owner for an overall review.
+  · upload — Manage uploads.
+  · · break end — End your break as an uploader.
+  · · break list — List all uploaders currently on break.
+  · · break start — Start your break as an uploader.
+  · · config channel — Manage uploader channels.
+  · · config role (role) — Set the uploader role.
+  · · layout add [details] — Record a new layout.
+  · · layout delete (record_id) — Delete a layout record.
+  · · points add (user) (amount) — Add points to an uploader.
+  · · points clear (user) — Clear points for an uploader.
+  · · points remove (user) (amount) — Remove points from an uploader.
+  · · points set (user) (amount) — Set points for an uploader.
+  · · points view [user] — View points for an uploader.
+  · · upload add [details] — Record a new upload.
+  · · upload delete (record_id) — Delete an upload record.
+  · · · config channel add (channel) — Add an uploader channel.
+  · · · config channel remove (channel) — Remove an uploader channel.
+
+- uptime — Shows you the bot's uptime.
+
+- user [user] — Show a user's message and voice activity.
+
+- vote — Vote for the bot on top.gg and claim rewards.
+  · claim — Claim your vote reward after voting on top.gg.
+  · leaderboard — View the top voters of all time.
+  · remind — Toggle DM reminders when your vote cooldown expires.
+
+- wanted — Check your wanted level.
+
+- weather (location) — Get the current weather for a location.
+
+- website — Tools for inspecting and interacting with websites.
+  · dns (domain) — Perform a DNS lookup for a domain.
+  · download (url) — Download and scrape a website's HTML, CSS, JS, and assets as a ZIP.
+  · screenshot (url) — Take a full-page screenshot of a website.
+  · scroll (url) — Render a scrolling video of a website.
+
+- whois [member] — View info about a user.
+
+- youngest — View the youngest Discord account in the server.
+
+—> music (15 top-level command groups)
+===============================================
+
+- 247 — Toggle 24/7 mode ��� bot stays in VC indefinitely.
+
+- audiofilter — Apply various audio filters to the music.
+  · 8d — Apply 8D audio filter.
+  · bass [percentage] — Apply bass boost filter.
+  · karaoke — Apply karaoke filter.
+  · nightcore — Apply nightcore filter.
+  · pop — Apply pop filter.
+  · reset — Reset all audio filters.
+  · soft — Apply soft filter.
+  · treble — Apply treble boost filter.
+  · tremolo — Apply tremolo filter.
+  · vaporwave — Apply vaporwave filter.
+  · vibrato — Apply vibrato filter.
+
+- autoplay — Toggle autoplay ��� similar songs play automatically when the queue ends.
+
+- filter — View a variety of options to help clean chat.
+  · add (word) — Add a word to the filter.
+  · caps [channel] [setting] [threshold] — Delete messages that contain too many uppercase characters.
+  · chatspam [channel] [setting] [threshold] [window] — Punish users who flood low-effort messages without engaging.
+  · config — View the configuration of every filter module.
+  · emoji [channel] [setting] [threshold] — Delete any message exceeding the threshold for emojis.
+  · exempt [role] — Exempt roles from the word filter.
+  · globallog [channel] — Set a fallback log channel used by every filter without one of its own.
+  · heat — Configure heat-based automod.
+  · invites [channel] [setting] — Delete any message that contains a server link.
+  · links [channel] [setting] — Delete any message that contains a link.
+  · list — View a list of filtered words in guild.
+  · logs [channel] — Configure log channel for the words filter.
+  · massmention [channel] [setting] [threshold] — Delete any message exceeding the threshold for user mentions.
+  · musicfiles [channel] [setting] — Delete any message that contains a music file.
+  · punishment (module) (punishment) [duration] — Set what a filter module does when it trips (delete/timeout/warn/kick/ban/none).
+  · regex (pattern) — Add a regex pattern to the word filter.
+  · remove (word) — Remove a word from the filter.
+  · reset — Reset all legacy filtered words.
+  · snipe (type) — Toggle whether deleted, edited, or purged messages are stored for snipe.
+  · spam [channel] [setting] [threshold] [window] — Delete messages from users that send messages too fast.
+  · spoilers [channel] [setting] [threshold] — Delete any message exceeding the threshold for spoilers.
+  · whitelist (word) — Remove a word or pattern from the word filter.
+  · wordmigrate — Migrate your filtered words to Discord's Automod.
+  · · caps exempt [role] — Exempt roles from the caps filter.
+  · · caps logs [channel] — Configure log channel for the caps filter.
+  · · emoji exempt [role] — Exempt roles from the emoji filter.
+  · · emoji logs [channel] — Configure log channel for the emoji filter.
+  · · exempt list — View list of roles exempted from word filter.
+  · · globallog remove — Clear the global filter log channel.
+  · · heat config [max_heat] [decay_rate] [strikes_cap] — Configure heat automod settings.
+  · · heat disable — Disable heat-based automod.
+  · · heat enable — Enable heat-based automod.
+  · · invites exempt [role] — Exempt roles from the invite filter.
+  · · invites logs [channel] — Configure log channel for the invites filter.
+  · · links exempt [role] — Exempt roles from the links filter.
+  · · links logs [channel] — Configure log channel for the links filter.
+  · · links whitelist [channel] (url) — Whitelist links from the links filter.
+  · · logs remove — Remove the log channel for the words filter.
+  · · logs view — View the log channel for the words filter.
+  · · massmention exempt [role] — Exempt roles from the mass mention filter.
+  · · massmention logs [channel] — Configure log channel for the massmention filter.
+  · · musicfiles exempt [role] — Exempt roles from the music files filter.
+  · · musicfiles logs [channel] — Configure log channel for the musicfiles filter.
+  · · spam exempt [role] — Exempt roles from the antispam filter.
+  · · spam logs [channel] — Configure log channel for the spam filter.
+  · · spoilers exempt [role] — Exempt roles from the spoilers filter.
+  · · spoilers logs [channel] — Configure log channel for the spoilers filter.
+  · · · caps exempt list — View list of roles exempted from caps filter.
+  · · · caps logs remove — Remove the log channel for the caps filter.
+  · · · caps logs view — View the log channel for the caps filter.
+  · · · emoji exempt list — View list of roles exempted from emoji filter.
+  · · · emoji logs remove — Remove the log channel for the emoji filter.
+  · · · emoji logs view — View the log channel for the emoji filter.
+  · · · invites exempt list — View list of roles exempted from invites filter.
+  · · · invites logs remove — Remove the log channel for the invites filter.
+  · · · invites logs view — View the log channel for the invites filter.
+  · · · links exempt list — View list of roles exempted from links filter.
+  · · · links logs remove — Remove the log channel for the links filter.
+  · · · links logs view — View the log channel for the links filter.
+  · · · massmention exempt list — View list of roles exempted from massmention filter.
+  · · · massmention logs remove — Remove the log channel for the massmention filter.
+  · · · massmention logs view — View the log channel for the massmention filter.
+  · · · musicfiles exempt list — View list of roles exempted from musicfiles filter.
+  · · · musicfiles logs remove — Remove the log channel for the musicfiles filter.
+  · · · musicfiles logs view — View the log channel for the musicfiles filter.
+  · · · spam exempt list — View list of roles exempted from spam filter.
+  · · · spam logs remove — Remove the log channel for the spam filter.
+  · · · spam logs view — View the log channel for the spam filter.
+  · · · spoilers exempt list — View list of roles exempted from spoilers filter.
+  · · · spoilers logs remove — Remove the log channel for the spoilers filter.
+  · · · spoilers logs view — View the log channel for the spoilers filter.
+
+- lavalink — View Lavalink node statistics and information.
+  · list — List all configured Lavalink nodes and their status.
+  · stats [identifier] — View detailed statistics for all connected Lavalink nodes.
+
+- musicstats [member] — View your music listening stats.
+
+- pause — Pause the current track.
+
+- play (query) [upnext] [position] [source] — Play any type of music from any platform.
+
+- playlist — Manage your playlists.
+  · add [args] — Add a track (or full Spotify / YouTube Music playlist) to one of your playlists. Defaults to the currently playing track.
+  · create (name) — Create a new playlist.
+  · delete (name) — Delete a playlist.
+  · list — List all your playlists.
+  · play (name) — Play a playlist
+  · remove (name) (position) — Remove a track from a playlist by position
+  · view (name) — View tracks in a playlist.
+
+- queue — Show or manage the music queue.
+  · clear — Clear the music queue.
+
+- resume — Resume the current track.
+
+- shuffle — Shuffle the queue.
+
+- skip — Skip the current track.
+
+- stop — Stop playback and leave channel.
+
+- volume (level) — Set the volume.
+
+—> recording (1 top-level command groups)
+==================================================
+
+- recording — Commands to record voice channels.
+  · delete (recording_id) — Delete a recording by its short ID.
+  · list — List the last 50 recordings for this server.
+  · start [channel] — Start recording a voice channel.
+  · stop [channel] — Stop an active recording and upload it.
+
+—> reposter (1 top-level command groups)
+=================================================
+
+- repost — Manage reposter channel restrictions.
+  · instagram — Manage Instagram reposter channel restrictions.
+  · pinterest — Manage Pinterest reposter channel restrictions.
+  · tiktok — Manage TikTok reposter channel restrictions.
+  · twitter — Manage Twitter/X reposter channel restrictions.
+  · · instagram add (channel) — Restrict Instagram reposts to a channel.
+  · · instagram list — List channels restricted for Instagram reposts.
+  · · instagram remove (channel) — Remove a channel from Instagram restrictions.
+  · · pinterest add (channel) — Restrict Pinterest reposts to a channel.
+  · · pinterest list — List channels restricted for Pinterest reposts.
+  · · pinterest remove (channel) — Remove a channel from Pinterest restrictions.
+  · · tiktok add (channel) — Restrict TikTok reposts to a channel.
+  · · tiktok list — List channels restricted for TikTok reposts.
+  · · tiktok remove (channel) — Remove a channel from TikTok restrictions.
+  · · twitter add (channel) — Restrict Twitter/X reposts to a channel.
+  · · twitter list — List channels restricted for Twitter/X reposts.
+  · · twitter remove (channel) — Remove a channel from Twitter/X restrictions.
+
+—> roleplay (57 top-level command groups)
+==================================================
+
+- angry [member] — go crazy go stupid, become one with haunt
+
+- baka [member] — you're literally such a baka
+
+- bite [member] — nom but make it aggressive
+
+- bleh [member] — eloquent as always
+
+- blowkiss [member] — muah muah muah
+
+- blush [member] — oh stop it you~
+
+- bonk [member] — no horny jail for you
+
+- carry [member] — i got you bestie
+
+- clap [member] — i cant think of what to put here cuz it sounds crazy everytime i word it
+
+- confused [member] — i don't know
+
+- cry [member] — its okay to let it out
+
+- cuddle [member] — squeeze squeeze squeeze
+
+- dance [member] — get down get down get down
+
+- facepalm [member] — you did WHAT
+
+- handhold [member] — holding hands... in this economy?
+
+- handshake [member] — very professional of you
+
+- happy [member] — we love to see it
+
+- highfive [member] — slap my hand bestie
+
+- hug [member] — free hugs (limited time offer)
+
+- kabedon [member] — anime protagonist moment
+
+- kiss [member] — smooch city population: you two
+
+- laugh [member] — lmaooooo
+
+- lurk [member] — ����
+
+- nom [member] — you look delicious
+
+- nope [member] — not today not ever
+
+- nya [member] — questionable command...
+
+- pat [member] — good job here's a pat
+
+- peck [member] — tiny lil kiss just for you
+
+- poke [member] — poke poke poke
+
+- pout [member] — bottom lip is trembling
+
+- pray [member] — Pray for a friend (or yourself) to bless their earnings.
+
+- punch [member] — POW right in the kisser
+
+- salute [member] — sir yes sir
+
+- shake [member] — grab em and shake em
+
+- ship [user] — Check the compatibility between two users.
+
+- shocked [member] — no way... NO WAY
+
+- shoot [member] — pew pew pew, not haunt though
+
+- shrug [member] — idk man idk
+
+- sip [member] — sipping and judging
+
+- slap [member] — the audacity
+
+- sleep [member] — zzzzz
+
+- smack [member] — HA. GOTCHA.
+
+- smile [member] — you have a great smile btw
+
+- smug [member] — hehe i know something you don't
+
+- stare [member] — ............
+
+- stupidtree [target] — Show a user's full family tree (blood + non-blood).
+
+- teehee [member] — tee. hee.
+
+- think [member] — galaxy brain moment
+
+- thumbsup [member] — you did great sweetie
+
+- tickle [member] — hehehe stop stop i cant breathe
+
+- uwuify (member)
+
+- uwulockreset
+
+- wag [member] — tail goes brrrrr
+
+- wave [member] — yoohoo over here!
+
+- wink [member] — ���� no words needed
+
+- yawn [member] — so sleepy... so very sleepy
+
+- yeet [member] — YEET (still funny every time)
+
+—> security (12 top-level command groups)
+==================================================
+
+- antibot — Block all bots (except slug) from talking in a channel.
+  · disable [channel] — Disable antibot in a channel and restore bot permissions.
+  · enable [channel] — Enable antibot in a channel.
+  · list — List channels with antibot enabled.
+  · reset — Disable antibot in every channel and clear the whitelist.
+  · whitelist [bot] — Allow specific bots to talk in antibot channels.
+  · · whitelist add (bot) — Whitelist a bot so it can talk in antibot channels.
+  · · whitelist list — List whitelisted bots.
+  · · whitelist remove (bot) — Remove a bot from the antibot whitelist.
+
+- antinuke — View the antinuke configuration for this server.
+  · admin — Manage members that can edit antinuke settings.
+  · ban — Prevent mass banning of members.
+  · botadd — Protect against unauthorized bot additions.
+  · channelcreate — Prevent mass channel creation.
+  · channeldelete — Prevent mass channel deletion.
+  · config — View the antinuke configuration.
+  · disable — Disable the antinuke system.
+  · duration (minutes) — Set the threshold window in minutes.
+  · editrole — Prevent editing dangerous role permissions.
+  · emoji — Configure emoji antinuke protections.
+  · enable — Enable the antinuke system.
+  · giverole — Prevent giving dangerous roles to members.
+  · kick — Prevent mass kicking of members.
+  · list — View all modules and whitelisted entries.
+  · logs [channel] — Set the antinuke log channel.
+  · mute — Protect against mass mute/timeout abuse.
+  · owner — Manage the extra owner of the server who can bypass all security and dashboard checks.
+  · panicmode — Auto-lockdown when a mass attack is detected.
+  · punishment — View the global antinuke punishment.
+  · reset — Completely remove antinuke from this server.
+  · restore (member) — Restore roles to a previously punished member.
+  · rolecreate — Prevent mass role creation.
+  · roledelete — Prevent mass role deletion.
+  · rolelock — Manage role locks on your server.
+  · setup — Enable the antinuke system on your server.
+  · staff — Manage roles that bypass antinuke checks.
+  · vanity — Protect your server vanity URL from changes.
+  · webhook — Protect against abusive webhook creation.
+  · whitelist [target] — Whitelist a user or role from antinuke.
+  · whitelisted — View all antinuke whitelisted members and roles.
+  · wizard — Enable all antinuke protections with default settings.
+  · · admin add (member) — Give a user antinuke admin permissions.
+  · · admin list — View all antinuke admins.
+  · · admin remove (member) — Remove antinuke admin permissions from a user.
+  · · ban disable — Disable ban protection.
+  · · ban enable [threshold] [punishment] — Enable ban protection.
+  · · ban threshold (threshold) — Set the ban-protection threshold.
+  · · botadd disable — Disable bot add protection.
+  · · botadd enable [punishment] — Enable bot add protection.
+  · · channelcreate disable — Disable channel create protection.
+  · · channelcreate enable [threshold] [punishment] — Enable channel create protection.
+  · · channelcreate threshold (threshold) — Set the channel create protection threshold.
+  · · channeldelete disable — Disable channel delete protection.
+  · · channeldelete enable [threshold] [punishment] — Enable channel delete protection.
+  · · channeldelete threshold (threshold) — Set the channel delete protection threshold.
+  · · editrole disable — Disable edit role protection.
+  · · editrole enable [punishment] — Enable edit role protection.
+  · · editrole threshold (threshold) — Set the edit role protection threshold.
+  · · emoji add [threshold] [punishment] — Enable protection against mass emoji additions.
+  · · emoji disable — Disable all emoji protections (add, remove, update).
+  · · emoji enable [threshold] [punishment] — Enable all emoji protections (add, remove, update).
+  · · emoji remove [threshold] [punishment] — Enable protection against mass emoji deletions.
+  · · emoji update [threshold] [punishment] — Enable protection against mass emoji edits.
+  · · giverole disable — Disable give role protection.
+  · · giverole enable [punishment] — Enable give role protection.
+  · · giverole threshold (threshold) — Set the give role protection threshold.
+  · · kick disable — Disable kick protection.
+  · · kick enable [threshold] [punishment] — Enable kick protection.
+  · · kick threshold (threshold) — Set the kick protection threshold.
+  · · mute disable — Disable mute protection.
+  · · mute enable [threshold] [punishment] — Enable mute protection.
+  · · mute threshold (threshold) — Set the mute protection threshold.
+  · · owner list — List the server owner and extra owner details.
+  · · owner remove (member) — Remove/clear the extra owner of the server.
+  · · owner reset — Reset the antinuke owner config (clears the extra owner).
+  · · owner set (member) — Set the extra owner of the server.
+  · · panicmode autotrigger (toggle) — Toggle whether antinuke events automatically trigger panic mode.
+  · · panicmode channel (channel) — Set the announcement channel for panic mode alerts.
+  · · panicmode disable — Disable panic mode.
+  · · panicmode enable — Enable panic mode.
+  · · punishment set (punishment) — Set the global antinuke punishment.
+  · · rolecreate disable — Disable role create protection.
+  · · rolecreate enable [threshold] [punishment] — Enable role create protection.
+  · · rolecreate threshold (threshold) — Set the role create protection threshold.
+  · · roledelete disable — Disable role delete protection.
+  · · roledelete enable [threshold] [punishment] — Enable role delete protection.
+  · · roledelete threshold (threshold) — Set the role delete protection threshold.
+  · · rolelock add (role) — Add a role to the lock list.
+  · · rolelock disable — Disable all role locks on the server.
+  · · rolelock enable — Enable all role locks on the server.
+  · · rolelock list — List all locked roles.
+  · · rolelock remove (role) — Remove a role from the lock list.
+  · · staff add (role) — Mark a role as trusted staff.
+  · · staff list — View all staff roles.
+  · · staff remove (role) — Remove a role from trusted staff.
+  · · vanity disable — Disable vanity protection.
+  · · vanity enable [punishment] — Enable vanity protection.
+  · · vanity threshold (threshold) — Set the vanity protection threshold.
+  · · webhook disable — Disable webhook protection.
+  · · webhook enable [threshold] [punishment] — Enable webhook protection.
+  · · webhook threshold (threshold) — Set the webhook protection threshold.
+  · · whitelist add (target) (modules) — Whitelist a user/role globally or for specific modules.
+  · · whitelist remove (target) (modules) — Remove a user/role from the global or per-module whitelist.
+  · · whitelist show — Show all whitelisted users and roles.
+
+- antiraid — View the antiraid configuration for this server.
+  · advertname (toggle) (flags) — Kick/ban members with Discord invite links in their username.
+  · age (toggle) (flags) — Kick or ban accounts that are too new.
+  · config — View the antiraid configuration.
+  · disable — Disable the antiraid system on your server.
+  · massjoin (toggle) (flags) — Configure mass join detection.
+  · noavatar (toggle) (flags) — Kick or ban members with no profile picture.
+  · setup — Enable the antiraid system on your server.
+  · unverifiedbot (toggle) (flags) — Kick/ban unverified bots that join the server.
+  · usernamefilter (toggle) (flags) — Filter members by username patterns on join.
+
+- botonly — Restrict channels to bots only.
+  · add (channel) — Make a channel bot-only, deleting human messages.
+  · list — View all bot-only channels in this server.
+  · remove (channel) — Remove bot-only restriction from a channel.
+
+- fakepermissions — configure fake permissions for roles.
+  · add (role) (permission) — add a fake permission to a role.
+  · list (role) — list all fake permissions assigned to a role.
+  · remove (role) (permission) — remove a fake permission from a role.
+  · reset (role) — reset fake permissions for a role.
+  · user — manage fake permissions for a specific user.
+  · · user add (member) (permission) — add a fake permission to a specific user.
+  · · user list (member) — list all fake permissions assigned to a user.
+  · · user remove (member) (permission) — remove a fake permission from a specific user.
+  · · user reset (member) — reset fake permissions for a user.
+
+- guardian — Guardian password ��� 2FA layer for dangerous role/permission changes.
+  · admin — Owner-only administrative actions.
+  · confirm (challenge_id) (credential) — Confirm a guardian challenge (DM only).
+  · enroll — Enroll your own credential (password and/or TOTP).
+  · lock (role) (password) — Lock a role ��� granting it triggers a guardian challenge.
+  · locked — List locked roles.
+  · master — Manage the guild master password (server owner only).
+  · reset — Show how to recover access if you lost the master password.
+  · trust — Manage the trusted-bot allowlist (skips challenges for these bots).
+  · unenroll (guild_id) (credential) — Drop your own enrollment. Requires current credential.
+  · unlock (role) (password) — Unlock a role.
+  · · admin approve (user) (password) — Approve a member's pending guardian enrollment. Owner only, requires master pw.
+  · · admin audit — Show the most recent guardian audit events for this guild.
+  · · admin pending — List members with pending (unapproved) guardian enrollments.
+  · · admin reject (user) (password) — Reject and delete a member's pending guardian enrollment. Owner only, requires master pw.
+  · · admin temp-disable (minutes) (password) — Suspend guardian for N minutes. Requires master password.
+  · · admin unenroll (member) (password) — Force-remove a member's enrollment. Owner only, requires master pw.
+  · · enroll password (guild_id) (password) — Set your personal password. DM only.
+  · · enroll status [guild_id] — Show what credentials you have enrolled.
+  · · enroll totp (guild_id) — Set up TOTP via QR code. DM only.
+  · · enroll verify (guild_id) (code) — Verify TOTP pairing with the first code.
+  · · master change (old_password) (new_password) — Rotate master password using the current one.
+  · · master disable (password) — Disable guardian. Requires master password.
+  · · master enable (password) — Enable guardian after disabling. Requires master password.
+  · · master require-approval (mode) (password) — Toggle whether new enrollments need owner approval. Requires master password.
+  · · master set (password) — First-time master password set. Owner only.
+  · · master status — Show guardian configuration for this guild.
+  · · master triggers (action) [trigger] [password] — Add or remove a trigger. Requires master password.
+  · · trust add (bot_user) (password) — Add a bot to the trusted allowlist. Owner only.
+  · · trust list — List trusted bots.
+  · · trust remove (bot_user) (password) — Remove a bot from the trusted allowlist. Owner only.
+
+- honeypot — Manage the Anti-Spam Honeypot channel.
+  · action (action) — Set the punish action: 'mute' or 'role'.
+  · disable — Disable the honeypot and delete the channel.
+  · role (role) — Set the role to give if action is set to 'role'.
+  · setup — Setup the honeypot channel.
+
+- panicmode — Activate panic mode to protect your server from an ongoing attack.
+
+- permissions [target] — View permissions of role or user.
+  · edit (channel) (target) — Edit permissions of a role.
+  · editchannel (channel) — Edit permissions of a channel.
+  · editrole (role) — Edit permissions of a role.
+
+- quarantine (member) [duration] [reason] — Quarantine management.
+  · info (member) — View quarantine details for a member.
+  · list — View all quarantined members in this server.
+  · remove (member) — Remove a member from quarantine.
+  · setup (role) — Set the quarantine role for this server.
+
+- restrict — Create role-based channel access restrictions.
+  · category — Manage channels within a restriction.
+  · clear — Remove all restriction sets from this server.
+  · create (name) (role) — Create a restriction set linked to a role.
+  · delete (name) — Delete a restriction set.
+  · view — View all restriction sets in this server.
+  · · category add (name) (channel) — Add a channel to a restriction.
+  · · category clear (name) — Remove all channels from a restriction.
+  · · category remove (name) (channel) — Remove a channel from a restriction.
+  · · category view (name) — View all channels in a restriction.
+
+- verification — View the verification configuration for this server.
+  · config — View the current verification configuration.
+  · disable — Disable the verification system.
+  · enable — Enable the verification system.
+  · logchannel (channel) — Set the channel where verification events are logged.
+  · mode (mode) — Set the verification mode.
+  · quarantine (role) — Set the quarantine role removed on verification.
+  · role (role) — Set the member role granted on verification.
+
+—> socials (17 top-level command groups)
+=================================================
+
+- anime (search) — Search AniList for anime information
+
+- discadia — Configure Discadia bump notifications.
+  · message (code) — Manage the Discadia bump notification message.
+  · role (role) — Set a role to assign to members who bump on Discadia.
+  · thank (code) — Manage the Discadia thank you message.
+  · · message view — Preview the Discadia bump notification message.
+  · · thank view — Preview the Discadia thank you message.
+
+- explore — Explore mysterious locations.
+
+- extraowner — Manage the extra owner for this server.
+  · info — Show the current extra owner of this server.
+  · remove — Remove the extra owner from this server.
+  · set (member) — Set a member as the extra owner of this server.
+
+- github (username) — Look up a GitHub profile and top repositories.
+
+- instagram (username) — Look up an Instagram profile.
+
+- manga (search) — Search AniList for manga information
+
+- movie (title) — Returns information about the specified movie title given.
+  · expand (title) — Returns more information on a movie.
+
+- noprefix — Manage no-prefix access for users.
+  · add (member) — Grant a user no-prefix access.
+  · remove (member) — Revoke a user's no-prefix access.
+
+- pinterest (username) — Look up a Pinterest profile.
+
+- prefix — View or change the bot's prefix.
+  · noprefix (toggle) — Toggle no-prefix mode (Patron+ ��� invoke commands without any prefix).
+  · self — View or change your personal prefix.
+  · set (prefix) — Set the bot's prefix for this server.
+  · · self reset — Reset your personal prefix.
+  · · self set (prefix) — Set your personal prefix.
+
+- roblox [user] — Get details about a Roblox User.
+  · avatar (user) — Get someone's Roblox avatar.
+  · avatars (user) — Browse a Roblox user's saved avatars.
+  · emotes (user) — View a Roblox user's equipped emotes.
+  · groups (user) — View the groups a Roblox user is in.
+
+- spotify [member] — View a user's spotify status.
+
+- steam (user) — Look up a Steam profile.
+
+- tiktok (username) — Look up a TikTok profile.
+
+- tvshow (title) — Returns information about the specified TV show title given.
+
+- x (username) — Look up an X (Twitter) profile.
+
+—> statistics (11 top-level command groups)
+====================================================
+
+- chart — Generate detailed activity charts.
+  · combined — Member joins and leaves combined chart.
+  · joins — Member joins chart over time.
+  · leaves — Member leaves chart over time.
+  · messages [channel] — Messages chart for a channel.
+  · status — Member status distribution (Online, DnD, Idle) over time.
+  · voice — Voice activity chart with contributors over time.
+
+- counter — Create stat counter channels for your server.
+  · create — Create a new counter channel.
+  · delete (channel) — Delete a counter channel.
+  · reset — Delete all counter channels in this server.
+  · view — View all counter channels in this server.
+  · · create announce — Counter for announcement channel count.
+  · · create boosters — Counter for server booster count.
+  · · create boosts — Counter for server boost count.
+  · · create bots — Counter for bot count.
+  · · create categories — Counter for category count.
+  · · create channels — Counter for total channel count.
+  · · create connected — Counter for members in voice.
+  · · create members — Counter for total member count.
+  · · create roles — Counter for role count.
+  · · create stage — Counter for stage channel count.
+  · · create text — Counter for text channel count.
+  · · create users — Counter for human member count.
+  · · create voice — Counter for voice channel count.
+
+- globalstats — View global statistics across all clusters.
+
+- membercount — Shows you the exact member count of the server.
+
+- messages [member] [channel] — Show a member's message statistics. Without #channel shows a full overview.
+  · add (member) (count) — add messages to a user's total (cannot be negative)
+  · daily — Show today's message leaderboard
+  · leaderboard — Show the message leaderboard for this server
+  · remove (member) (count) — remove messages from a user's total (cannot go below 0)
+  · reset [member] — reset your messages, or another member's (requires manage messages).
+  · resetall — reset every member's messages for this server.
+  · set (member) (count) — set total messages sent for a user
+  · tracking (action) — Enable or disable message activity tracking for this server.
+  · type (kind) [member] — Show a breakdown of a specific message type (text, sticker, gif, emoji) for a member.
+
+- position [member] — Check member join position.
+
+- rankings — Show top message and voice contributors in this server.
+
+- stats
+  · ignore (channel) — Ignore a channel from tracking messages and voice activity. Useful for channels like #spam or voice channels used for music bots that would skew statistics.
+  · ignored — List channels that are currently ignored from tracking messages and voice activity.
+  · unignore (channel) — Stop ignoring a channel from tracking messages and voice activity.
+
+- streaks — Track daily message streaks.
+  · channel [channel] — Set the announcement channel.
+  · claim — Claim monthly restore tokens.
+  · leaderboard — Show the streak leaderboard.
+  · message [code] — Customize the streak continued message using an embed script.
+  · mode (mode) — Set the streak message mode.
+  · restore — Restore a broken streak.
+  · reward — Manage milestone roles.
+  · threshold (amount) — Set the daily message threshold.
+  · toggle — Enable or disable streaks.
+  · unlock (amount) — Set the streak unlock requirement.
+  · · message reset — Reset the streak message back to the default.
+  · · message view — View the current streak message script.
+  · · reward add (days) (role) — Add a milestone role.
+  · · reward remove (days) — Remove a milestone role.
+
+- vcstats [member] — Show a detailed voice-state breakdown (muted, deafened, AFK, locked/unlocked) for a member.
+
+- vctime [member] [channel] — Show how much time a member has spent in voice channels. Without a channel shows a full overview.
+  · daily — Show today's voice activity leaderboard
+  · leaderboard — Show the voice activity leaderboard for this server
+
+—> track (8 top-level command groups)
+==============================================
+
+- avatarhistory — Track and view avatar history.
+  · clear — Clear your own avatar history.
+  · disable — Opt out of avatar history tracking.
+  · enable — Enable avatar history tracking for yourself.
+  · view [member] — View avatar history for a member.
+
+- avh [member] — View avatar history for a member.
+
+- checkvanity (vanity) — Check if a Discord vanity URL is currently available.
+
+- namehistory [user] — View a user's name history.
+  · clear — Remove all your name history.
+
+- snapshot — Freeze the role order so only permitted members can reorder roles.
+  · disable — Stop reverting role reorders.
+  · enable — Start reverting role reorders that are not permitted.
+  · logs [channel] — Send snapshot activity to a channel. Run without a channel to disable.
+  · save — Save the current role order as the snapshot to restore to.
+  · status — Show the saved role snapshot and who can reorder roles.
+
+- stalk (target) — Get DM alerts when someone is active (voice + messages).
+  · list — List everyone you're stalking.
+  · stop (target) — Stop stalking a user.
+
+- track — Track username, vanity, avatar, and banner changes.
+  · banners (channel) — Post an alert when a user changes their banner.
+  · names (channel) — Post an alert when a user changes their Discord username.
+  · optout — Opt out of having your server's vanity URL tracked and broadcasted.
+  · pfps (channel) — Post an alert when a user changes their profile picture.
+  · vanities (channel) — Post an alert when any Discord server drops their vanity URL.
+  · · banners disable — Disable banner change alerts.
+  · · names disable — Disable username change alerts.
+  · · pfps disable — Disable avatar change alerts.
+  · · vanities disable — Disable vanity change alerts.
+
+- vanity — Reward members with exclusive roles whenever they use the server vanity.
+  · channel (channel) — Set the channel for both addition and revoke messages.
+  · disable — Disable exclusive vanity rewards for your server.
+  · enable — Enable exclusive vanity rewards for the server.
+  · ignore — Ignore members or roles from getting vanity rewards.
+  · message [message] — Set a custom message sent when a member uses the server vanity.
+  · reset — Reset all vanity reward settings for your server.
+  · revoke [message] — Set a custom message sent when a member stops using the server vanity.
+  · reward — Manage roles given as vanity rewards.
+  · set (target) — Set a custom target string for the vanity (e.g. .gg/slug).
+  · settings — View the current vanity reward settings.
+  · strict — Toggle whether the vanity code must be the entire status or can be a substring.
+  · · ignore role [role] — Ignore members with a specific role from getting vanity rewards.
+  · · ignore user [member] — Ignore a member from getting vanity rewards.
+  · · message channel (channel) — Set the channel to send the vanity message to.
+  · · message clear — Clear the custom vanity message.
+  · · message disable — Disable the custom vanity message.
+  · · message enable — Enable the custom vanity message.
+  · · message view — View the custom vanity message you've set.
+  · · revoke channel (channel) — Set the channel to send the revoke message to.
+  · · revoke clear — Clear the custom revoke message.
+  · · revoke disable — Disable the revoke message.
+  · · revoke enable — Enable the revoke message.
+  · · revoke view — View the custom revoke message you've set.
+  · · reward add (role) — Add a role as a vanity reward.
+  · · reward clear — Clear all vanity reward roles.
+  · · reward remove (role) — Remove a role from vanity rewards.
+  · · reward view — View all configured vanity reward roles.
+  · · · ignore role clear — Clear all ignored roles.
+  · · · ignore role remove (role) — Allow members with a role to receive vanity rewards again.
+  · · · ignore role view — View all ignored roles.
+  · · · ignore user clear — Clear all ignored members.
+  · · · ignore user remove (member) — Allow a member to receive vanity rewards again.
+  · · · ignore user view — View all ignored members.
+
+—> voicemaster (1 top-level command groups)
+====================================================
+
+- voicemaster — Make temporary voice channels in your server!
+  · bitrate (bitrate) — Edit bitrate of your voice channel
+  · category (channel) — Set a category for voice channels
+  · claim — Claim an inactive voice channel
+  · configuration — See current configuration for current voice channel
+  · defaultbitrate (bitrate) — Edit default bitrate for new Voice Channels
+  · defaultregion (region) — Set the default voice channel region for new voice channels
+  · defaultrole (role) — Set a role that members get for being in a VM channel
+  · generator — Set up extra join-to-create generators with fixed sizes.
+  · ghost — Hide your voice channel
+  · interface
+  · invites — Manage who can send you VoiceMaster invites
+  · limit (limit) — Edit user limit of your voice channel
+  · lock — Lock your voice channel
+  · name (name) — Rename your voice channel
+  · permit (target) — Permit a member or role to join your VC
+  · refresh — Re-render this server's VoiceMaster interface panel.
+  · reject (target) — Reject a member or role from joining your VC
+  · reset — Reset server configuration for VoiceMaster
+  · setup — Begin VoiceMaster server configuration setup
+  · transfer (member) — Transfer ownership of your channel to another member
+  · unghost — Reveal your voice channel
+  · unlock — Unlock your voice channel
+  · · generator duo — Create a Duo (2-slot) generator.
+  · · generator list — List configured generators.
+  · · generator remove (channel) — Remove a generator.
+  · · generator squad [size] — Create a Squad generator with a custom size.
+  · · generator trio — Create a Trio (3-slot) generator.
+  · · interface move (channel)
+  · · interface send [channel] [custom]
+  · · interface template
+  · · invites allow — Start receiving VoiceMaster invites again
+  · · invites block — Stop receiving VoiceMaster invites entirely
+  · · invites blocked — List the members you've blocked from inviting you
+  · · invites blockuser (member) — Stop a member from sending you VoiceMaster invites
+  · · invites unblock (member) — Let a member send you VoiceMaster invites again
+  · · · interface template create (name)
+  · · · interface template list
+  · · · interface template remove (name)
+
