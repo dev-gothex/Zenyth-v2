@@ -31,6 +31,9 @@ import { startAutomation } from "./commands/handlers/automation";
 import { startConfessions } from "./commands/handlers/confessions";
 import { startEngagement } from "./commands/handlers/engagement";
 import { startGreetings } from "./commands/handlers/greetings";
+import { startModLog } from "./commands/handlers/modlog";
+import { startModTools } from "./commands/handlers/modtools";
+import { startPunishments } from "./commands/handlers/modpunish";
 import { startInterface } from "./commands/handlers/interface";
 import { startTracking } from "./commands/handlers/track";
 import { startVoiceMaster } from "./commands/handlers/voicemaster";
@@ -123,6 +126,9 @@ export async function startZenythBot(): Promise<void> {
   startTracking(client);
   startGreetings(client);
   startEngagement(client);
+  startModLog(client);
+  startModTools(client);
+  startPunishments(client);
 
   client.once(Events.ClientReady, (readyClient) => {
     status.username = readyClient.user.username;

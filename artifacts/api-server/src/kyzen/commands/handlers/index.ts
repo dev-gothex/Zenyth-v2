@@ -10,6 +10,9 @@ import { FAMILY_HANDLERS } from "./family";
 import { FUN_HANDLERS } from "./fun";
 import { UTILITY_HANDLERS } from "./utility";
 import { MODERATION_HANDLERS } from "./moderation";
+import { MODLOG_HANDLERS } from "./modlog";
+import { MODPUNISH_HANDLERS } from "./modpunish";
+import { MODTOOLS_HANDLERS } from "./modtools";
 import { ROLEPLAY_HANDLERS } from "./roleplay";
 import { VANITY_HANDLERS } from "./vanity";
 import { VOICE_HANDLERS } from "./voice";
@@ -26,6 +29,9 @@ export const HANDLERS = new Map<string, Handler>(
     ...AUTOMATION_HANDLERS,
     ...ROLEPLAY_HANDLERS,
     ...MODERATION_HANDLERS,
+    ...MODLOG_HANDLERS,
+    ...MODTOOLS_HANDLERS,
+    ...MODPUNISH_HANDLERS,
     ...VANITY_HANDLERS,
     ...VOICE_HANDLERS,
     ...VOICEMASTER_HANDLERS,
@@ -38,4 +44,4 @@ export const HANDLERS = new Map<string, Handler>(
 );
 
 /** Commands that should run even when called with no arguments. */
-export const BARE_OK = new Set(["afk", "info", "timezone", "level", "birthday"]);
+export const BARE_OK = new Set(["afk", "info", "timezone", "level", "birthday", "modcases"]);

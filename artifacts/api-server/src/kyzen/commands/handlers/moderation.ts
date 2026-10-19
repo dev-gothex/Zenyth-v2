@@ -3,12 +3,13 @@ import { guildData, save } from "../../store";
 import { formatDuration, parseChannel, parseDuration, parseInteger, parseMember, parseUser } from "../args";
 import { CommandError, UsageError, type Ctx, type Handler } from "../types";
 import { embed } from "../ui";
+import { isImmune, logCase, runWarnActions } from "./modlog";
 
 const MAX_TIMEOUT = 28 * 86_400_000;
 const reason = (ctx: Ctx, from: number) => ctx.args.slice(from).join(" ") || "No reason provided";
 const audit = (ctx: Ctx, text: string) => `${text} (by ${ctx.member.user.tag})`;
 
-function assertCanAct(ctx: Ctx, target: GuildMember): void {
+export function assertCanAct(ctx: Ctx, target: GuildMember): void {
   if (target.id === ctx.member.id) throw new CommandError("You cannot do that to yourself.");
   if (target.id === ctx.guild.ownerId) throw new CommandError("You cannot do that to the server owner.");
   if (
@@ -17,6 +18,7 @@ function assertCanAct(ctx: Ctx, target: GuildMember): void {
   ) {
     throw new CommandError("That member's highest role is equal to or above yours.");
   }
+  if (isImmune(ctx.guild, target)) throw new CommandError("That member is immune to moderation.");
 }
 
 async function needMember(ctx: Ctx): Promise<GuildMember> {
@@ -66,6 +68,7 @@ export const MODERATION_HANDLERS: Record<string, Handler> = {
     const target = await needMember(ctx);
     if (!target.bannable) throw new CommandError("I cannot ban that member.");
     await target.ban({ reason: audit(ctx, reason(ctx, 1)) });
+    logCase(ctx, "ban", target.id, reason(ctx, 1));
     await ctx.ok(`Banned **${target.user.tag}**.`);
   },
   softban: async (ctx) => {
@@ -73,12 +76,14 @@ export const MODERATION_HANDLERS: Record<string, Handler> = {
     if (!target.bannable) throw new CommandError("I cannot ban that member.");
     await target.ban({ reason: audit(ctx, reason(ctx, 1)), deleteMessageSeconds: 7 * 86_400 });
     await ctx.guild.members.unban(target.id, "Softban");
+    logCase(ctx, "softban", target.id, reason(ctx, 1));
     await ctx.ok(`Softbanned **${target.user.tag}**.`);
   },
   kick: async (ctx) => {
     const target = await needMember(ctx);
     if (!target.kickable) throw new CommandError("I cannot kick that member.");
     await target.kick(audit(ctx, reason(ctx, 1)));
+    logCase(ctx, "kick", target.id, reason(ctx, 1));
     await ctx.ok(`Kicked **${target.user.tag}**.`);
   },
   unban: async (ctx) => {
@@ -87,6 +92,7 @@ export const MODERATION_HANDLERS: Record<string, Handler> = {
     await ctx.guild.members.unban(user.id, audit(ctx, reason(ctx, 1))).catch(() => {
       throw new CommandError(`**${user.tag}** is not banned.`);
     });
+    logCase(ctx, "unban", user.id, reason(ctx, 1));
     await ctx.ok(`Unbanned **${user.tag}**.`);
   },
   "unban all": async (ctx) => {
@@ -100,6 +106,7 @@ export const MODERATION_HANDLERS: Record<string, Handler> = {
     const ms = Math.min(parsed ?? 3_600_000, MAX_TIMEOUT);
     if (!target.moderatable) throw new CommandError("I cannot time out that member.");
     await target.timeout(ms, audit(ctx, reason(ctx, parsed ? 2 : 1)));
+    logCase(ctx, "timeout", target.id, reason(ctx, parsed ? 2 : 1), ms);
     await ctx.ok(`Timed out **${target.user.tag}** for ${formatDuration(ms)}.`);
   },
   "timeout list": async (ctx) => {
@@ -112,6 +119,7 @@ export const MODERATION_HANDLERS: Record<string, Handler> = {
   untimeout: async (ctx) => {
     const target = await needMember(ctx);
     await target.timeout(null, audit(ctx, reason(ctx, 1)));
+    logCase(ctx, "untimeout", target.id, reason(ctx, 1));
     await ctx.ok(`Removed the timeout from **${target.user.tag}**.`);
   },
   "untimeout all": async (ctx) => {
@@ -126,7 +134,10 @@ export const MODERATION_HANDLERS: Record<string, Handler> = {
     const id = (all.at(-1)?.id ?? 0) + 1;
     all.push({ id, userId: target.id, reason: reason(ctx, 1), at: Date.now(), by: ctx.member.id });
     save();
-    await ctx.ok(`Warned **${target.user.tag}**. Case \`${id}\`.`);
+    const caseId = logCase(ctx, "warn", target.id, reason(ctx, 1));
+    const count = all.filter((w) => w.userId === target.id).length;
+    const auto = await runWarnActions(ctx, target, count).catch(() => undefined);
+    await ctx.ok(`Warned **${target.user.tag}**. Case \`${caseId}\`.${auto ? `\n${auto}` : ""}`);
   },
   "warn list": async (ctx) => {
     const target = await parseMember(ctx, ctx.args[0]);

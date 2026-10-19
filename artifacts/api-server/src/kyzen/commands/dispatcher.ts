@@ -31,6 +31,7 @@ import {
   type Indexed,
 } from "./types";
 import { embed } from "./ui";
+import { hasBypass } from "./handlers/modlog";
 
 const details = rawDetails as Record<string, CommandReferenceGroup[]>;
 const INDEX = new Map<string, Indexed>();
@@ -94,6 +95,7 @@ function missingPermission(ctx: Ctx, label: string): boolean {
   const bit = PERMISSION_BITS[label];
   if (bit === undefined) return false;
   if (ctx.guild.ownerId === ctx.member.id) return false;
+  if (ctx.indexed.moduleId === "moderation" && hasBypass(ctx.guild, ctx.member, ctx.path)) return false;
   const perms = ctx.member.permissions;
   return !(perms.has(PermissionFlagsBits.Administrator) || perms.has(bit));
 }

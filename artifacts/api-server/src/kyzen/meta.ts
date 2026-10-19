@@ -15,6 +15,7 @@ export const PERMISSION_BITS: Record<string, bigint | undefined> = {
   "Deafen Members": PermissionFlagsBits.DeafenMembers,
   "Mute Members": PermissionFlagsBits.MuteMembers,
   "Move Members": PermissionFlagsBits.MoveMembers,
+  "View Audit Log": PermissionFlagsBits.ViewAuditLog,
 };
 
 const ROOT_ALIASES: Record<string, string> = {
@@ -51,6 +52,29 @@ const MODERATION_ROOT_PERMISSIONS: Record<string, string> = {
   forcenickname: "Manage Nicknames",
   role: "Manage Roles",
   strip: "Manage Roles",
+  jail: "Moderate Members",
+  unjail: "Moderate Members",
+  chatban: "Moderate Members",
+  vcban: "Moderate Members",
+  modcases: "Moderate Members",
+  modstats: "Moderate Members",
+  history: "Moderate Members",
+  scan: "Moderate Members",
+  audit: "View Audit Log",
+  editsnipe: "Manage Messages",
+  reactionsnipe: "Manage Messages",
+  autosnipe: "Manage Guild",
+  autopurge: "Manage Guild",
+  cleanup: "Manage Messages",
+  reveal: "Manage Channels",
+  nsfw: "Manage Channels",
+  picperms: "Manage Channels",
+  thread: "Manage Channels",
+  moveall: "Move Members",
+  drag: "Move Members",
+  emoji: "Manage Guild",
+  sticker: "Manage Guild",
+  newusers: "Moderate Members",
 };
 
 const VOICE_SUB_PERMISSIONS: Record<string, string> = {
