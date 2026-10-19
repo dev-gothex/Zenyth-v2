@@ -3,6 +3,7 @@ import {
   Events,
   GatewayIntentBits,
   MessageFlags,
+  Partials,
 } from "discord.js";
 import { logger } from "../lib/logger";
 import {
@@ -28,6 +29,8 @@ import {
 import { runCommand } from "./commands/dispatcher";
 import { startAutomation } from "./commands/handlers/automation";
 import { startConfessions } from "./commands/handlers/confessions";
+import { startEngagement } from "./commands/handlers/engagement";
+import { startGreetings } from "./commands/handlers/greetings";
 import { startInterface } from "./commands/handlers/interface";
 import { startTracking } from "./commands/handlers/track";
 import { startVoiceMaster } from "./commands/handlers/voicemaster";
@@ -99,6 +102,7 @@ export async function startZenythBot(): Promise<void> {
 
   status.state = "connecting";
   const client = new Client({
+    partials: [Partials.Message, Partials.Channel, Partials.Reaction],
     intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
@@ -107,6 +111,7 @@ export async function startZenythBot(): Promise<void> {
       GatewayIntentBits.GuildMembers,
       GatewayIntentBits.GuildVoiceStates,
       GatewayIntentBits.GuildModeration,
+      GatewayIntentBits.GuildMessageReactions,
     ],
   });
   botClient = client;
@@ -116,6 +121,8 @@ export async function startZenythBot(): Promise<void> {
   startInterface(client);
   startConfessions(client);
   startTracking(client);
+  startGreetings(client);
+  startEngagement(client);
 
   client.once(Events.ClientReady, (readyClient) => {
     status.username = readyClient.user.username;

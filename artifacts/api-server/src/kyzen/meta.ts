@@ -68,27 +68,21 @@ const VOICE_SUB_PERMISSIONS: Record<string, string> = {
   nickall: "Manage Nicknames",
 };
 
-const USER_LEVEL_ROOTS = new Set([
-  "afk",
-  "boosts",
-  "channelinfo",
-  "roleinfo",
-  "serverinfo",
-  "serveravatar",
-  "servericon",
-  "serverbanner",
-  "joinposition",
-  "recentjoins",
-  "poll",
-  "quickpoll",
-  "suggest",
-  "tag",
-  "timezone",
-  "translate",
+/** Exact command paths anyone may run, whatever their module's default is. */
+const USER_LEVEL_PATHS = new Set([
+  "afk", "boosts", "channelinfo", "roleinfo", "serverinfo", "serveravatar", "servericon",
+  "serverbanner", "joinposition", "recentjoins", "poll", "quickpoll", "suggest", "translate",
+  "timezone", "timezone set", "timezone remove",
+  "level", "level leaderboard", "birthday", "birthday set",
 ]);
+/** Roots that live in modules without an admin default but need Manage Guild. */
+const ADMIN_ROOTS = new Set(["giveaway", "starboard", "birthday", "level"]);
+
 
 export function getPermissionLabel(moduleId: string, path: string): string {
   const [root, sub] = path.toLowerCase().split(/\s+/);
+  if (USER_LEVEL_PATHS.has(path.toLowerCase())) return "Standard Access";
+  if (ADMIN_ROOTS.has(root)) return "Manage Guild";
   if (moduleId === "moderation") {
     if (root === "voice") return sub ? (VOICE_SUB_PERMISSIONS[sub] ?? "Standard Access") : "Standard Access";
     return MODERATION_ROOT_PERMISSIONS[root] ?? "Manage Guild";
@@ -104,7 +98,7 @@ export function getPermissionLabel(moduleId: string, path: string): string {
   if (
     ["config", "voicemaster", "feeds", "reposter", "track", "confessions", "esports", "statistics", "socials"].includes(moduleId)
   ) {
-    return USER_LEVEL_ROOTS.has(root) && moduleId === "config" ? "Standard Access" : "Manage Guild";
+    return "Manage Guild";
   }
   return "Standard Access";
 }

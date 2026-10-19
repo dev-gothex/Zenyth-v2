@@ -1,5 +1,7 @@
 import { AUTOMATION_HANDLERS } from "./automation";
 import { CONFESSION_HANDLERS } from "./confessions";
+import { ENGAGEMENT_HANDLERS } from "./engagement";
+import { GREETING_HANDLERS } from "./greetings";
 import { INTERFACE_HANDLERS } from "./interface";
 import { TRACK_HANDLERS } from "./track";
 import { VOICEMASTER_HANDLERS } from "./voicemaster";
@@ -30,8 +32,10 @@ export const HANDLERS = new Map<string, Handler>(
     ...INTERFACE_HANDLERS,
     ...CONFESSION_HANDLERS,
     ...TRACK_HANDLERS,
+    ...GREETING_HANDLERS,
+    ...ENGAGEMENT_HANDLERS,
   }),
 );
 
 /** Commands that should run even when called with no arguments. */
-export const BARE_OK = new Set(["afk", "info"]);
+export const BARE_OK = new Set(["afk", "info", "timezone", "level", "birthday"]);
