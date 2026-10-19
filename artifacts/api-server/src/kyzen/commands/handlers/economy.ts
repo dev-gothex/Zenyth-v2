@@ -4,14 +4,14 @@ import { CommandError, type Ctx, type Handler } from "../types";
 import { embed } from "../ui";
 
 const CURRENCY = "Dallars";
-const fmt = (n: number) => `${n.toLocaleString("en-US")} ${CURRENCY}`;
+export const fmt = (n: number) => `${n.toLocaleString("en-US")} ${CURRENCY}`;
 
 interface Eco {
   wallet: number;
   bank: number;
   cooldowns: Record<string, number>;
 }
-function eco(userId: string): Eco {
+export function eco(userId: string): Eco {
   const bag = userData(userId);
   bag.eco ??= { wallet: 0, bank: 0, cooldowns: {} } satisfies Eco;
   return bag.eco as Eco;
@@ -38,7 +38,7 @@ function reward(key: string, ms: number, min: number, max: number, label: string
   };
 }
 
-function amountOf(token: string | undefined, available: number): number {
+export function amountOf(token: string | undefined, available: number): number {
   const n = token?.toLowerCase() === "all" ? available : parseInteger(token);
   if (n === null || n === undefined || n <= 0) throw new CommandError("Enter a valid amount, or `all`.");
   if (n > available) throw new CommandError(`You only have **${fmt(available)}** available.`);

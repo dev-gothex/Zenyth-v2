@@ -68,7 +68,24 @@ const VOICE_SUB_PERMISSIONS: Record<string, string> = {
   nickall: "Manage Nicknames",
 };
 
-const USER_LEVEL_ROOTS = new Set(["afk", "alias", "boosterrole"]);
+const USER_LEVEL_ROOTS = new Set([
+  "afk",
+  "boosts",
+  "channelinfo",
+  "roleinfo",
+  "serverinfo",
+  "serveravatar",
+  "servericon",
+  "serverbanner",
+  "joinposition",
+  "recentjoins",
+  "poll",
+  "quickpoll",
+  "suggest",
+  "tag",
+  "timezone",
+  "translate",
+]);
 
 export function getPermissionLabel(moduleId: string, path: string): string {
   const [root, sub] = path.toLowerCase().split(/\s+/);

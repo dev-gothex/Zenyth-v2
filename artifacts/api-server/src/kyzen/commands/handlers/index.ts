@@ -1,4 +1,8 @@
+import { AUTOMATION_HANDLERS } from "./automation";
 import { ECONOMY_HANDLERS } from "./economy";
+import { FAMILY_HANDLERS } from "./family";
+import { FUN_HANDLERS } from "./fun";
+import { UTILITY_HANDLERS } from "./utility";
 import { MODERATION_HANDLERS } from "./moderation";
 import { ROLEPLAY_HANDLERS } from "./roleplay";
 import { VANITY_HANDLERS } from "./vanity";
@@ -10,9 +14,16 @@ import type { Handler } from "../types";
 export const HANDLERS = new Map<string, Handler>(
   Object.entries({
     ...ECONOMY_HANDLERS,
+    ...UTILITY_HANDLERS,
+    ...FUN_HANDLERS,
+    ...FAMILY_HANDLERS,
+    ...AUTOMATION_HANDLERS,
     ...ROLEPLAY_HANDLERS,
     ...MODERATION_HANDLERS,
     ...VANITY_HANDLERS,
     ...VOICE_HANDLERS,
   }),
 );
+
+/** Commands that should run even when called with no arguments. */
+export const BARE_OK = new Set(["afk", "info"]);

@@ -22,7 +22,7 @@ import {
 } from "../meta";
 import { ZENYTH_PREFIX } from "../modules";
 import { genericHandlerFor } from "./handlers/generic";
-import { HANDLERS } from "./handlers";
+import { BARE_OK, HANDLERS } from "./handlers";
 import {
   CommandError,
   UsageError,
@@ -109,10 +109,10 @@ export async function runCommand(
 
   const handler = handlerFor(indexed);
   const requiredCount = indexed.entry.parameters.filter((p) => p.required).length;
+  const bareOk = args.length === 0 && BARE_OK.has(indexed.entry.path.toLowerCase());
   const showUsage =
     !handler ||
-    (indexed.hasChildren && args.length === 0) ||
-    args.length < requiredCount;
+    (!bareOk && ((indexed.hasChildren && args.length === 0) || args.length < requiredCount));
   if (showUsage) {
     await showReference(message, path);
     return;
