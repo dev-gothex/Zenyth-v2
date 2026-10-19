@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: zenyth-bot
+    runtime: node
+    plan: starter # free instances sleep when idle, which takes the bot offline
+    region: oregon
+    buildCommand: npm install -g pnpm@10 && pnpm install --frozen-lockfile && pnpm --filter @workspace/api-server run build
+    startCommand: pnpm --filter @workspace/api-server run start
+    healthCheckPath: /api/healthz
+    disk:
+      name: zenyth-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: ZENYTH_DATA_DIR
+        value: /var/data
+      - key: DISCORD_BOT_TOKEN
+        sync: false # you enter this in the Render dashboard
+      - key: ZENYTH_PREFIX
+        value: ";"
