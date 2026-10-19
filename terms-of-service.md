@@ -93,9 +93,9 @@ These Terms are subject to applicable laws and regulations. Any disputes will be
 For questions, concerns, or assistance regarding Zenyth, contact the development team through the official support channels.
 
 - Bot Name: Zenyth
-- Developer: [Your Name or Team]
-- Support Server: [Your Discord Invite]
-- Contact Email: [Your Contact Email]
+- Developer: kaiserwentoff 
+- Support Server: https://discord.gg/ztZwb9fGyZ
+- Contact Email: nexora.devv@gmail.com
 
 15. Third-Party Policies
 
