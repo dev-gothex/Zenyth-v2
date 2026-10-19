@@ -16,7 +16,7 @@ function voiceOf(member: GuildMember): VoiceBasedChannel | null {
 }
 
 /** The caller's current voice channel, if they may manage it. */
-function ownChannel(ctx: Ctx): VoiceBasedChannel {
+export function ownChannel(ctx: Ctx): VoiceBasedChannel {
   const channel = voiceOf(ctx.member);
   if (!channel) throw new CommandError("Join a voice channel first.");
   const owners = (guildData(ctx.guild.id).voiceOwners ??= {}) as Record<string, string>;

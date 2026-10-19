@@ -27,6 +27,10 @@ import {
 } from "./command-reference";
 import { runCommand } from "./commands/dispatcher";
 import { startAutomation } from "./commands/handlers/automation";
+import { startConfessions } from "./commands/handlers/confessions";
+import { startInterface } from "./commands/handlers/interface";
+import { startTracking } from "./commands/handlers/track";
+import { startVoiceMaster } from "./commands/handlers/voicemaster";
 import { startVanityWatcher } from "./commands/handlers/vanity";
 import {
   ZENYTH_MODULES,
@@ -108,6 +112,10 @@ export async function startZenythBot(): Promise<void> {
   botClient = client;
   startVanityWatcher(client);
   startAutomation(client);
+  startVoiceMaster(client);
+  startInterface(client);
+  startConfessions(client);
+  startTracking(client);
 
   client.once(Events.ClientReady, (readyClient) => {
     status.username = readyClient.user.username;

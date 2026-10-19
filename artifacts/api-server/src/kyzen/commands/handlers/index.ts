@@ -1,4 +1,8 @@
 import { AUTOMATION_HANDLERS } from "./automation";
+import { CONFESSION_HANDLERS } from "./confessions";
+import { INTERFACE_HANDLERS } from "./interface";
+import { TRACK_HANDLERS } from "./track";
+import { VOICEMASTER_HANDLERS } from "./voicemaster";
 import { ECONOMY_HANDLERS } from "./economy";
 import { FAMILY_HANDLERS } from "./family";
 import { FUN_HANDLERS } from "./fun";
@@ -22,6 +26,10 @@ export const HANDLERS = new Map<string, Handler>(
     ...MODERATION_HANDLERS,
     ...VANITY_HANDLERS,
     ...VOICE_HANDLERS,
+    ...VOICEMASTER_HANDLERS,
+    ...INTERFACE_HANDLERS,
+    ...CONFESSION_HANDLERS,
+    ...TRACK_HANDLERS,
   }),
 );
 

@@ -94,6 +94,13 @@ export function getPermissionLabel(moduleId: string, path: string): string {
     return MODERATION_ROOT_PERMISSIONS[root] ?? "Manage Guild";
   }
   if (moduleId === "security") return "Administrator";
+  if (moduleId === "voicemaster") {
+    const admin = ["setup", "category", "defaultbitrate", "defaultregion", "defaultrole", "generator", "interface", "refresh", "reset"];
+    return admin.includes(sub ?? "") ? "Manage Guild" : "Standard Access";
+  }
+  if (moduleId === "track") {
+    return ["avatarhistory", "avh", "checkvanity", "namehistory", "stalk"].includes(root) ? "Standard Access" : "Manage Guild";
+  }
   if (
     ["config", "voicemaster", "feeds", "reposter", "track", "confessions", "esports", "statistics", "socials"].includes(moduleId)
   ) {
