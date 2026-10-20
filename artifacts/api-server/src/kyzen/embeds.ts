@@ -390,7 +390,7 @@ export function createBotInfoEmbed(
   } else if (page === "partners") {
     embed
       .setTitle("Partner Servers")
-      .setDescription(`[Singles](${PARTNER_SERVER_URL})`);
+      .setDescription(`[/ Singles 🦋 | Indian • Gws • Hangout • Chilling • Fun • Vc](${PARTNER_SERVER_URL})`);
   } else {
     const processors = os.cpus();
     const logicalCores = processors.length;
