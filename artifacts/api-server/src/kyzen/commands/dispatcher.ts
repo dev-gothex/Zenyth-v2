@@ -20,7 +20,7 @@ import {
   resolveRootAlias,
   resolveSubAlias,
 } from "../meta";
-import { ZENYTH_PREFIX } from "../modules";
+import { guildPrefix } from "../prefix";
 import { genericHandlerFor } from "./handlers/generic";
 import { BARE_OK, HANDLERS } from "./handlers";
 import {
@@ -136,7 +136,7 @@ export async function runCommand(
     path,
     args,
     raw,
-    prefix: ZENYTH_PREFIX,
+    prefix: guildPrefix(message.guild.id),
     reply: send,
     ok: (t) => send(embed(t)),
     fail: (t) => send(embed(t)),

@@ -27,6 +27,7 @@ import {
   parseCommandReferenceInteraction,
 } from "./command-reference";
 import { runCommand } from "./commands/dispatcher";
+import { guildPrefix, matchPrefix } from "./prefix";
 import { handleOwnerCommand, isBlocked, noPrefixAllowed, startOwnerSystem } from "./owner";
 import { startAutomation } from "./commands/handlers/automation";
 import { startConfessions } from "./commands/handlers/confessions";
@@ -178,11 +179,11 @@ export async function startZenythBot(): Promise<void> {
     if (
       client.user &&
       message.mentions.users.has(client.user.id) &&
-      !message.content.startsWith(ZENYTH_PREFIX)
+      !matchPrefix(message)
     ) {
       try {
         await message.channel.send({
-          embeds: [createMentionEmbed(message.author.id, ZENYTH_PREFIX)],
+          embeds: [createMentionEmbed(message.author.id, guildPrefix(message.guildId))],
           allowedMentions: {
             parse: [],
             users: [message.author.id],
@@ -194,10 +195,10 @@ export async function startZenythBot(): Promise<void> {
       return;
     }
 
-    const prefixed = message.content.startsWith(ZENYTH_PREFIX);
-    if (!prefixed && !noPrefixAllowed(message)) return;
+    const used = matchPrefix(message);
+    if (!used && !noPrefixAllowed(message)) return;
 
-    const commandText = (prefixed ? message.content.slice(ZENYTH_PREFIX.length) : message.content).trim();
+    const commandText = (used ? used.rest : message.content).trim();
     const [rawCommand, ...args] = commandText.split(/\s+/);
     const command = rawCommand?.toLowerCase();
 

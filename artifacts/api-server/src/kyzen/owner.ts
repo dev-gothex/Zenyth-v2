@@ -2,12 +2,16 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  ContainerBuilder,
   EmbedBuilder,
   Events,
   MessageFlags,
   type Client,
   type Guild,
   type Message,
+  SeparatorBuilder,
+  SeparatorSpacingSize,
+  TextDisplayBuilder,
   type TextChannel,
   type User,
 } from "discord.js";
@@ -16,13 +20,14 @@ import { resolveCommand } from "./commands/dispatcher";
 import { allUsers, flushNow, globalData, reloadStore, save, userData } from "./store";
 import { formatDuration, parseDuration } from "./commands/args";
 import { ENV_OWNERS, HARD_OWNER, staffLists } from "./staff";
+import { guildPrefix, matchPrefix } from "./prefix";
+import { ZENYTH_PREFIX } from "./modules";
 
 export { staffLists };
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type Bag = Record<string, any>;
 
-export const OWNER_PREFIX = process.env.ZENYTH_OWNER_PREFIX ?? ".";
 const WHITE = 0xffffff;
 
 /** 3 = owner, 2 = developer, 1 = admin/core, 0 = nobody. */
@@ -72,6 +77,28 @@ function parseDur(token?: string): number | null | undefined {
   return parseDuration(token) ?? undefined;
 }
 const until = (ms: number | null) => (ms === null ? null : Date.now() + ms);
+/** 7 days, 12 hours, 30 minutes... */
+function longDuration(ms: number): string {
+  const units: [string, number][] = [["day", 86_400_000], ["hour", 3_600_000], ["minute", 60_000]];
+  for (const [name, size] of units) {
+    if (ms >= size) {
+      const n = Math.round(ms / size);
+      return `${n} ${name}${n === 1 ? "" : "s"}`;
+    }
+  }
+  return "under a minute";
+}
+
+/** Sends a white embed DM from the bot. Returns false when the user has DMs closed. */
+export async function dmEmbed(client: Client, userId: string, title: string, text: string): Promise<boolean> {
+  const user = await client.users.fetch(userId).catch(() => null);
+  if (!user) return false;
+  const card = new EmbedBuilder().setColor(WHITE).setTitle(title).setDescription(text).setTimestamp();
+  if (client.user) card.setAuthor({ name: client.user.username, iconURL: client.user.displayAvatarURL() });
+  return user.send({ embeds: [card] }).then(() => true).catch(() => false);
+}
+const accessText = (at: number | null) => (at === null ? "This access does not expire." : `It expires <t:${Math.floor(at / 1000)}:R> (<t:${Math.floor(at / 1000)}:f>).`);
+
 const whenText = (at: number | null) => (at === null ? "permanent" : `expires ${stamp(at)}`);
 
 interface OCtx {
@@ -79,7 +106,10 @@ interface OCtx {
   message: Message;
   args: string[];
   raw: string;
+  prefix: string;
   reply(text: string, title?: string): Promise<unknown>;
+  /** DMs the user an embed unless `--nodm` was given. Returns a short note for the reply. */
+  dm(userId: string, title: string, text: string): Promise<string>;
 }
 class OwnerError extends Error {}
 const fail = (msg: string): never => { throw new OwnerError(msg); };
@@ -117,12 +147,11 @@ const SECTIONS: [string, string[]][] = [
   ["6. Staff & Team Management", [".addadmin @user", ".removeadmin @user", ".adddev @user", ".removedev @user", ".stafflist", ".team developers add @user", ".team developers remove @user", ".team core add @user", ".team core remove @user"]],
   ["7. Logs & Audit", [".logchannel set <webhook URL>", ".logchannel disable"]],
   ["8. Database & Cache", [".hydrate", ".flush"]],
-  ["9. Diagnostics & Voting", [".recordvote <userId> [weight]"]],
+  ["9. Diagnostics & Voting", [".recordvote <userId> [weight]", ".dm @user <message>"]],
   ["10. System Operations", [".reboot"]],
 ];
 
-export function ownerHelpEmbed(client: Client): EmbedBuilder {
-  const prefix = OWNER_PREFIX;
+export function ownerHelpEmbed(client: Client, prefix = ZENYTH_PREFIX): EmbedBuilder {
   const body = SECTIONS.map(([title, lines]) => `**${title}**\n${lines.map((l) => `> ${prefix}${l.slice(1)}`).join("\n")}`).join("\n\n");
   return new EmbedBuilder()
     .setColor(WHITE)
@@ -136,7 +165,7 @@ interface Cmd { level: number; sub?: Record<string, number>; run(c: OCtx): Promi
 const onOff = (arr: string[], id: string, add: boolean) => (add ? (arr.includes(id) ? arr : [...arr, id]) : arr.filter((x) => x !== id));
 
 const COMMANDS: Record<string, Cmd> = {
-  ownerhelp: { level: 1, run: async (c) => { await c.message.reply({ embeds: [ownerHelpEmbed(c.client)], allowedMentions: { parse: [] } }); } },
+  ownerhelp: { level: 1, run: async (c) => { await c.message.reply({ embeds: [ownerHelpEmbed(c.client, c.prefix)], allowedMentions: { parse: [] } }); } },
 
   /* 1. security */
   blacklistserver: {
@@ -305,7 +334,8 @@ const COMMANDS: Record<string, Cmd> = {
       prem[user.id] = { expiresAt: until(duration as number | null), slots, by: c.message.author.id };
       save();
       await ownerLog(`Premium added: ${user.tag} (${slots} slots, ${whenText(prem[user.id].expiresAt)})`);
-      await c.reply(`Gave ${user} premium with **${slots}** slot${slots === 1 ? "" : "s"} (${whenText(prem[user.id].expiresAt)}).`);
+      const note = await c.dm(user.id, "Premium Added", `You now have **Premium** with **${slots}** server slot${slots === 1 ? "" : "s"}. ${accessText(prem[user.id].expiresAt)}\nAsk the staff to activate it in your server.`);
+      await c.reply(`Gave ${user} premium with **${slots}** slot${slots === 1 ? "" : "s"} (${whenText(prem[user.id].expiresAt)}).${note}`);
     },
   },
   removeprem: {
@@ -317,7 +347,8 @@ const COMMANDS: Record<string, Cmd> = {
       for (const [gid, p] of Object.entries<Bag>(state().premiumGuilds)) if (p.userId === user.id) delete state().premiumGuilds[gid];
       save();
       await ownerLog(`Premium removed: ${user.tag}`);
-      await c.reply(`Removed premium from ${user} and deactivated their servers.`);
+      const note = await c.dm(user.id, "Premium Revoked", "Your **Premium** access has been removed and your activated servers were deactivated.");
+      await c.reply(`Removed premium from ${user} and deactivated their servers.${note}`);
     },
   },
   pactivate: {
@@ -362,13 +393,15 @@ const COMMANDS: Record<string, Cmd> = {
         if (d === undefined) fail("Use a duration like `7d`, or `perm`.");
         np[user.id] = { expiresAt: until(d as number | null) };
         save();
-        await c.reply(`Gave ${user} no-prefix access (${whenText(np[user.id].expiresAt)}).`);
+        const note = await c.dm(user.id, "No-Prefix Access Granted", `You can now use commands **without a prefix**. ${accessText(np[user.id].expiresAt)}`);
+        await c.reply(`Gave ${user} no-prefix access (${whenText(np[user.id].expiresAt)}).${note}`);
       } else if (sub === "remove") {
         const user = await userArg(c, c.args[1]);
         if (!np[user.id]) fail("That user does not have no-prefix access.");
         delete np[user.id];
         save();
-        await c.reply(`Removed no-prefix access from ${user}.`);
+        const note = await c.dm(user.id, "No-Prefix Access Revoked", "Your no-prefix access has been removed. Commands need the prefix again.");
+        await c.reply(`Removed no-prefix access from ${user}.${note}`);
       } else fail("Usage: `.noprefix <add|remove|list> [@user] [duration]`");
     },
   },
@@ -380,22 +413,28 @@ const COMMANDS: Record<string, Cmd> = {
       if (d === undefined) fail("Use a duration like `3d`, or `perm`.");
       state().noprefix[user.id] = { expiresAt: until(d as number | null) };
       save();
-      await c.reply(`Gave ${user} no-prefix access (${whenText(state().noprefix[user.id].expiresAt)}).`);
+      const note = await c.dm(user.id, "No-Prefix Access Granted", `You can now use commands **without a prefix**. ${accessText(state().noprefix[user.id].expiresAt)}`);
+      await c.reply(`Gave ${user} no-prefix access (${whenText(state().noprefix[user.id].expiresAt)}).${note}`);
     },
   },
   noprefixtrial: {
     level: 2,
     run: async (c) => {
-      if (c.args[0]?.toLowerCase() !== "setup") fail("Usage: `.noprefixtrial setup [duration]`");
-      const d = c.args[1] ? parseDur(c.args[1]) : state().trial.durationMs;
-      if (!d) fail("Use a duration like `1d`.");
+      if (c.args[0]?.toLowerCase() !== "setup") fail(`Usage: \`${c.prefix}noprefixtrial setup [duration]\`, for example \`${c.prefix}noprefixtrial setup 7d\``);
+      const d = c.args[1] ? parseDur(c.args[1]) : 14 * 86_400_000;
+      if (!d) fail("Use a duration like `7d` or `14d`.");
       state().trial.durationMs = d;
       save();
-      const row = new ActionRowBuilder<ButtonBuilder>().addComponents(new ButtonBuilder().setCustomId("npt:claim").setLabel("Claim trial").setStyle(ButtonStyle.Secondary));
-      await (c.message.channel as TextChannel).send({
-        embeds: [embed(`Press the button to get **${formatDuration(d as number)}** of no-prefix access. Each user can claim it once.`, "No-prefix trial")],
-        components: [row],
-      });
+      const days = longDuration(d as number);
+      const button = new ButtonBuilder().setCustomId("npt:claim").setLabel(`Claim No-Prefix (${days})`).setStyle(ButtonStyle.Primary);
+      const panel = new ContainerBuilder()
+        .setAccentColor(WHITE)
+        .addTextDisplayComponents(new TextDisplayBuilder().setContent("# Get No-Prefix Access (Free Trial)"))
+        .addSeparatorComponents(new SeparatorBuilder().setDivider(true).setSpacing(SeparatorSpacingSize.Small))
+        .addTextDisplayComponents(new TextDisplayBuilder().setContent(`Claim your free no-prefix access for **${days}** \u2014 type commands without any prefix.`))
+        .addTextDisplayComponents(new TextDisplayBuilder().setContent("-# \u2022 You can claim this once\n-# \u2022 Access expires automatically"))
+        .addActionRowComponents(new ActionRowBuilder<ButtonBuilder>().addComponents(button));
+      await (c.message.channel as TextChannel).send({ components: [panel], flags: MessageFlags.IsComponentsV2 });
     },
   },
 
@@ -570,6 +609,18 @@ const COMMANDS: Record<string, Cmd> = {
     },
   },
 
+  dm: {
+    level: 2,
+    run: async (c) => {
+      const user = await userArg(c, c.args[0]);
+      const text = c.args.slice(1).join(" ");
+      if (!text) fail(`Usage: \`${c.prefix}dm @user <message>\``);
+      const ok = await dmEmbed(c.client, user.id, "Message from the team", text);
+      if (!ok) fail("I could not DM that user. They may have DMs closed.");
+      await c.reply(`Sent ${user} a DM.`);
+    },
+  },
+
   /* 9. voting */
   recordvote: {
     level: 2,
@@ -613,20 +664,31 @@ async function staffEdit(c: OCtx, list: "admins" | "devs" | "core", add: boolean
 
 /* ---------- entry points used by bot.ts ---------- */
 export async function handleOwnerCommand(client: Client, message: Message): Promise<boolean> {
-  if (!message.content.startsWith(OWNER_PREFIX)) return false;
+  const used = matchPrefix(message);
+  if (!used) return false;
   const level = accessLevel(message.author.id);
   if (level === 0) return false;
-  const [name, ...args] = message.content.slice(OWNER_PREFIX.length).trim().split(/\s+/);
-  const cmd = COMMANDS[name?.toLowerCase() ?? ""];
+  const tokens = used.rest.trim().split(/\s+/);
+  const name = tokens[0]?.toLowerCase() ?? "";
+  const nodm = tokens.includes("--nodm");
+  const args = tokens.slice(1).filter((t) => t !== "--nodm");
+  const cmd = Object.hasOwn(COMMANDS, name) ? COMMANDS[name] : undefined;
   if (!cmd) return false;
 
+  const prefix = used.prefix;
+  const fixPrefix = (text: string) => text.replace(/`\.(?=[a-z])/g, `\`${prefix}`);
   const need = cmd.sub?.[args[0]?.toLowerCase() ?? ""] ?? cmd.level;
   const ctx: OCtx = {
     client,
     message,
     args,
     raw: args.join(" "),
-    reply: (text, title) => message.reply({ embeds: [embed(text, title)], allowedMentions: { parse: [] } }),
+    prefix,
+    reply: (text, title) => message.reply({ embeds: [embed(fixPrefix(text), title)], allowedMentions: { parse: [] } }),
+    dm: async (userId, title, text) => {
+      if (nodm) return "";
+      return (await dmEmbed(client, userId, title, text)) ? " DM sent." : " Their DMs are closed, so no DM was sent.";
+    },
   };
   if (level < need) {
     await ctx.reply(`This needs **${["", "admin", "developer", "owner"][need]}** access.`);
@@ -634,7 +696,7 @@ export async function handleOwnerCommand(client: Client, message: Message): Prom
   }
   try {
     await cmd.run(ctx);
-    if (name.toLowerCase() !== "ownerhelp") void ownerLog(`<@${message.author.id}> ran \`${OWNER_PREFIX}${name} ${args.join(" ").slice(0, 120)}\``);
+    if (name !== "ownerhelp") void ownerLog(`<@${message.author.id}> ran \`${prefix}${name} ${args.join(" ").slice(0, 120)}\``);
   } catch (error) {
     if (error instanceof OwnerError) await ctx.reply(error.message);
     else {
@@ -685,19 +747,27 @@ export function startOwnerSystem(client: Client): void {
       s.trial.claimed[i.user.id] = Date.now();
       s.noprefix[i.user.id] = { expiresAt: Date.now() + s.trial.durationMs, trial: true };
       save();
-      await i.reply({ content: `Trial started. You can use commands without the prefix for **${formatDuration(s.trial.durationMs)}**.`, flags: MessageFlags.Ephemeral });
+      await i.reply({ content: `Trial started. You can use commands without the prefix for **${longDuration(s.trial.durationMs)}**.`, flags: MessageFlags.Ephemeral });
+      void dmEmbed(client, i.user.id, "No-Prefix Access Granted", `Your free trial is active. ${accessText(s.noprefix[i.user.id].expiresAt)}`);
     })().catch((err: unknown) => logger.error({ err }, "No-prefix trial failed"));
   });
 
   setInterval(() => {
     const s = state();
     let changed = false;
-    for (const [id, e] of Object.entries<Bag>(s.noprefix)) if (e.expiresAt !== null && e.expiresAt <= Date.now()) { delete s.noprefix[id]; changed = true; }
+    for (const [id, e] of Object.entries<Bag>(s.noprefix)) {
+      if (e.expiresAt !== null && e.expiresAt <= Date.now()) {
+        delete s.noprefix[id];
+        changed = true;
+        void dmEmbed(client, id, "No-Prefix Access Expired", "Your no-prefix access has ended. Commands need the prefix again.");
+      }
+    }
     for (const [id, p] of Object.entries<Bag>(s.premium)) {
       if (p.expiresAt !== null && p.expiresAt <= Date.now()) {
         delete s.premium[id];
         for (const [gid, pg] of Object.entries<Bag>(s.premiumGuilds)) if (pg.userId === id) delete s.premiumGuilds[gid];
         changed = true;
+        void dmEmbed(client, id, "Premium Expired", "Your **Premium** access has ended and your activated servers were deactivated.");
       }
     }
     if (changed) save();

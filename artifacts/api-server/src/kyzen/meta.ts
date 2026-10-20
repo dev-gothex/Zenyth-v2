@@ -98,6 +98,7 @@ const USER_LEVEL_PATHS = new Set([
   "serverbanner", "joinposition", "recentjoins", "poll", "quickpoll", "suggest", "translate",
   "timezone", "timezone set", "timezone remove",
   "level", "level leaderboard", "birthday", "birthday set",
+  "prefix", "prefix self", "prefix self set", "prefix self reset",
 ]);
 /** Roots that live in modules without an admin default but need Manage Guild. */
 const ADMIN_ROOTS = new Set(["giveaway", "starboard", "birthday", "level"]);
