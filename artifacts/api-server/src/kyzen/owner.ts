@@ -140,7 +140,7 @@ export async function ownerLog(text: string): Promise<void> {
 /* ---------- the panel ---------- */
 const SECTIONS: [string, string[]][] = [
   ["1. Security & Global Restrictions", [".blacklistserver <server_id> [reason]", ".unblacklistserver <server_id>", ".blacklistservers", ".globalban <user_id> [reason]", ".globalunban <user_id>", ".globalbans", ".guildnp <add|remove|status|list>", ".serverban <add|remove|list> <serverId>"]],
-  ["2. Server Management", [".serverlist [page]", ".serverleave <serverId>", ".serverjoin"]],
+  ["2. Server Management", [".serverlist [page]", ".serverleave <serverId>", ".serverjoin", ".serverinvite <serverId> [duration]"]],
   ["3. Premium Management", [".addprem @user [duration] [slots]", ".removeprem @user", ".pactivate <serverId> @user", ".premiumdeactivate <serverId>"]],
   ["4. No-Prefix Access & Trials", [".noprefix add @user [duration]", ".noprefix remove @user", ".noprefix list", ".garib @user [duration]", ".noprefixtrial setup"]],
   ["5. Branding, Badges & Ship Images", [".branding", ".branding avatar <https-url>", ".branding banner <https-url>", ".branding bio <text>", ".branding server", ".branding reset", ".badge add @user <name> [emoji]", ".badge remove @user <name>", ".badge list [@user]", ".shipimages add", ".shipimages remove", ".shipimages list"]],
@@ -297,6 +297,22 @@ const COMMANDS: Record<string, Cmd> = {
       await guild.leave();
       await ownerLog(`Left server ${guild.name} (\`${guild.id}\`) by owner command.`);
       await c.reply(`Left **${guild.name}**.`);
+    },
+  },
+  serverinvite: {
+    level: 2,
+    run: async (c) => {
+      const guild = guildArg(c, c.args[0]);
+      const d = c.args[1] ? parseDur(c.args[1]) : 3_600_000;
+      if (d === undefined) fail("Use a duration like `1h` or `7d`, or `perm`.");
+      const me = guild.members.me;
+      const channel = [guild.systemChannel, guild.rulesChannel, ...guild.channels.cache.values()].find(
+        (ch) => ch && !ch.isThread() && !ch.isVoiceBased() && "createInvite" in ch && me?.permissionsIn(ch).has("CreateInstantInvite"),
+      ) as TextChannel | undefined;
+      const invite = await channel?.createInvite({ maxAge: d === null ? 0 : Math.floor((d as number) / 1000), maxUses: 0, unique: true, reason: `Requested by ${c.message.author.tag}` }).catch(() => null);
+      if (!invite) fail("I could not create an invite there. I need the Create Invite permission in at least one channel.");
+      await ownerLog(`Invite to **${guild.name}** (\`${guild.id}\`) created by <@${c.message.author.id}>.`);
+      await c.reply(`**${guild.name}** (${guild.memberCount.toLocaleString("en-US")} members)\n${invite!.url}\n${d === null ? "Never expires." : `Expires in ${formatDuration(d as number)}.`}`, "Server invite");
     },
   },
   serverjoin: {
