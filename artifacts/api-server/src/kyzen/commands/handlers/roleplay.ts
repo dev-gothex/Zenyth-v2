@@ -2,6 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import { parseUser } from "../args";
 import { type Ctx, type Handler } from "../types";
 import { WHITE, embed } from "../ui";
+import { globalData } from "../../store";
 
 /** name -> [with a target, on their own]. {a} is the author, {b} the target. */
 const ACTIONS: Record<string, [string, string]> = {
@@ -100,8 +101,9 @@ export const ROLEPLAY_HANDLERS: Record<string, Handler> = {
     for (const ch of `${x}${y}`) hash = (hash * 31 + ch.charCodeAt(0)) % 101;
     const filled = Math.round(hash / 10);
     const bar = "#".repeat(filled) + "-".repeat(10 - filled);
-    await ctx.reply(
-      embed(`**${ctx.member.displayName}** and **${target.displayName}**\n\`[${bar}]\` **${hash}%**`, "Compatibility"),
-    );
+    const card = embed(`**${ctx.member.displayName}** and **${target.displayName}**\n\`[${bar}]\` **${hash}%**`, "Compatibility");
+    const images = (globalData().shipImages ?? []) as string[];
+    if (images.length) card.setImage(images[Math.floor(Math.random() * images.length)]);
+    await ctx.reply(card);
   },
 };

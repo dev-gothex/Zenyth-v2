@@ -27,6 +27,7 @@ import {
   parseCommandReferenceInteraction,
 } from "./command-reference";
 import { runCommand } from "./commands/dispatcher";
+import { handleOwnerCommand, isBlocked, noPrefixAllowed, startOwnerSystem } from "./owner";
 import { startAutomation } from "./commands/handlers/automation";
 import { startConfessions } from "./commands/handlers/confessions";
 import { startEngagement } from "./commands/handlers/engagement";
@@ -115,6 +116,7 @@ export async function startZenythBot(): Promise<void> {
       GatewayIntentBits.GuildVoiceStates,
       GatewayIntentBits.GuildModeration,
       GatewayIntentBits.GuildMessageReactions,
+      GatewayIntentBits.DirectMessages,
     ],
   });
   botClient = client;
@@ -126,6 +128,7 @@ export async function startZenythBot(): Promise<void> {
   startTracking(client);
   startGreetings(client);
   startEngagement(client);
+  startOwnerSystem(client);
   startModLog(client);
   startModTools(client);
   startPunishments(client);
@@ -165,6 +168,13 @@ export async function startZenythBot(): Promise<void> {
   client.on(Events.MessageCreate, async (message) => {
     if (message.author.bot) return;
 
+    try {
+      if (await handleOwnerCommand(client, message)) return;
+    } catch (error) {
+      logger.error({ err: error }, "Owner command dispatch failed");
+    }
+    if (isBlocked(message)) return;
+
     if (
       client.user &&
       message.mentions.users.has(client.user.id) &&
@@ -184,11 +194,10 @@ export async function startZenythBot(): Promise<void> {
       return;
     }
 
-    if (!message.content.startsWith(ZENYTH_PREFIX)) return;
+    const prefixed = message.content.startsWith(ZENYTH_PREFIX);
+    if (!prefixed && !noPrefixAllowed(message)) return;
 
-    const commandText = message.content
-      .slice(ZENYTH_PREFIX.length)
-      .trim();
+    const commandText = (prefixed ? message.content.slice(ZENYTH_PREFIX.length) : message.content).trim();
     const [rawCommand, ...args] = commandText.split(/\s+/);
     const command = rawCommand?.toLowerCase();
 

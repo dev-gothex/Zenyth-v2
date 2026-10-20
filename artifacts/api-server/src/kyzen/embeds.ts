@@ -26,6 +26,9 @@ import {
 } from "./modules";
 import { getCommandsForGroup } from "./catalog";
 import { getAliases, getPermissionLabel } from "./meta";
+import { staffLists } from "./staff";
+
+const mentionList = (ids: string[]) => ids.map((id) => `<@${id}>`).join(", ") || "None";
 import rawModuleCommandSummaries from "./module-command-summaries.json";
 
 const EMBED_WHITE = 0xffffff;
@@ -382,9 +385,9 @@ export function createBotInfoEmbed(
       .setTitle("Team Information")
       .setDescription(
         [
-          `**Owners**\n<@${OWNER_ID}>`,
-          `**Developers**\n<@${OWNER_ID}>`,
-          `**Core Team**\n<@${OWNER_ID}>`,
+          `**Owners**\n${mentionList(staffLists().owners)}`,
+          `**Developers**\n${mentionList([...new Set([...staffLists().owners, ...staffLists().devs])])}`,
+          `**Core Team**\n${mentionList([...new Set([...staffLists().owners, ...staffLists().core])])}`,
         ].join("\n\n"),
       );
   } else if (page === "partners") {

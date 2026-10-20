@@ -6,6 +6,7 @@ type Bag = Record<string, any>;
 interface Data {
   guilds: Record<string, Bag>;
   users: Record<string, Bag>;
+  global: Bag;
 }
 
 const DATA_DIR = process.env.ZENYTH_DATA_DIR ?? resolve(process.cwd(), "data");
@@ -14,9 +15,9 @@ const DATA_FILE = join(DATA_DIR, "store.json");
 function load(): Data {
   try {
     const parsed = JSON.parse(readFileSync(DATA_FILE, "utf8")) as Data;
-    return { guilds: parsed.guilds ?? {}, users: parsed.users ?? {} };
+    return { guilds: parsed.guilds ?? {}, users: parsed.users ?? {}, global: parsed.global ?? {} };
   } catch {
-    return { guilds: {}, users: {} };
+    return { guilds: {}, users: {}, global: {} };
   }
 }
 
@@ -43,6 +44,31 @@ export function guildData(guildId: string): Bag {
 /** Global per-user bag (economy, etc). Mutate it, then call save(). */
 export function userData(userId: string): Bag {
   return (data.users[userId] ??= {});
+}
+
+/** Bot-wide state (blacklists, premium, staff, branding...). */
+export function globalData(): Bag {
+  return data.global;
+}
+
+/** Re-reads store.json from disk, replacing what is in memory. */
+export function reloadStore(): { guilds: number; users: number } {
+  if (timer) {
+    clearTimeout(timer); // do not lose changes that were about to be written
+    flush();
+  }
+  const fresh = load();
+  data.guilds = fresh.guilds;
+  data.users = fresh.users;
+  data.global = fresh.global;
+  return { guilds: Object.keys(data.guilds).length, users: Object.keys(data.users).length };
+}
+
+/** Writes the in-memory state to disk immediately. */
+export function flushNow(): { guilds: number; users: number } {
+  if (timer) clearTimeout(timer);
+  flush();
+  return { guilds: Object.keys(data.guilds).length, users: Object.keys(data.users).length };
 }
 
 export function allUsers(): Record<string, Bag> {
