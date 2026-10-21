@@ -22,7 +22,7 @@ import {
 } from "../meta";
 import { guildPrefix } from "../prefix";
 import { genericHandlerFor } from "./handlers/generic";
-import { BARE_OK, HANDLERS } from "./handlers";
+import { BARE_OK, HANDLERS, LOOSE_ARGS } from "./handlers";
 import {
   CommandError,
   UsageError,
@@ -112,9 +112,10 @@ export async function runCommand(
   const handler = handlerFor(indexed);
   const requiredCount = indexed.entry.parameters.filter((p) => p.required).length;
   const bareOk = args.length === 0 && BARE_OK.has(indexed.entry.path.toLowerCase());
+  const loose = LOOSE_ARGS.has(indexed.entry.path.toLowerCase());
   const showUsage =
     !handler ||
-    (!bareOk && ((indexed.hasChildren && args.length === 0) || args.length < requiredCount));
+    (!loose && !bareOk && ((indexed.hasChildren && args.length === 0) || args.length < requiredCount));
   if (showUsage) {
     await showReference(message, path);
     return;

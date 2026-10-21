@@ -37,6 +37,7 @@ import { startModLog } from "./commands/handlers/modlog";
 import { startModTools } from "./commands/handlers/modtools";
 import { startPunishments } from "./commands/handlers/modpunish";
 import { startInterface } from "./commands/handlers/interface";
+import { startStatistics } from "./commands/handlers/statistics";
 import { startTracking } from "./commands/handlers/track";
 import { startVoiceMaster } from "./commands/handlers/voicemaster";
 import { startVanityWatcher } from "./commands/handlers/vanity";
@@ -127,6 +128,7 @@ export async function startZenythBot(): Promise<void> {
   startInterface(client);
   startConfessions(client);
   startTracking(client);
+  startStatistics(client);
   startGreetings(client);
   startEngagement(client);
   startOwnerSystem(client);

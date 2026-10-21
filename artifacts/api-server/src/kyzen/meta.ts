@@ -99,6 +99,11 @@ const USER_LEVEL_PATHS = new Set([
   "timezone", "timezone set", "timezone remove",
   "level", "level leaderboard", "birthday", "birthday set",
   "prefix", "prefix self", "prefix self set", "prefix self reset",
+  "messages", "messages leaderboard", "messages daily", "messages type", "messages reset",
+  "position", "membercount", "rankings", "stats", "stats ignored", "vcstats", "vctime", "vctime daily",
+  "vctime leaderboard", "streaks", "streaks leaderboard", "streaks claim", "streaks restore", "globalstats",
+  "chart", "chart combined", "chart joins", "chart leaves", "chart messages", "chart status", "chart voice",
+  "counter view", "me", "user", "info", "info user",
 ]);
 /** Roots that live in modules without an admin default but need Manage Guild. */
 const ADMIN_ROOTS = new Set(["giveaway", "starboard", "birthday", "level"]);

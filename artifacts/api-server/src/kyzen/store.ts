@@ -71,6 +71,10 @@ export function flushNow(): { guilds: number; users: number } {
   return { guilds: Object.keys(data.guilds).length, users: Object.keys(data.users).length };
 }
 
+export function allGuilds(): Record<string, Bag> {
+  return data.guilds;
+}
+
 export function allUsers(): Record<string, Bag> {
   return data.users;
 }
