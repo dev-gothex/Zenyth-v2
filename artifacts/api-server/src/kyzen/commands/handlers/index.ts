@@ -12,6 +12,7 @@ import { FAMILY_HANDLERS } from "./family";
 import { FUN_HANDLERS } from "./fun";
 import { UTILITY_HANDLERS } from "./utility";
 import { PREFIX_HANDLERS } from "./prefixcmd";
+import { LOGGING_HANDLERS } from "./logging";
 import { MODERATION_HANDLERS } from "./moderation";
 import { MODLOG_HANDLERS } from "./modlog";
 import { MODPUNISH_HANDLERS } from "./modpunish";
@@ -44,6 +45,7 @@ export const HANDLERS = new Map<string, Handler>(
     ...CONFESSION_HANDLERS,
     ...TRACK_HANDLERS,
     ...GREETING_HANDLERS,
+    ...LOGGING_HANDLERS,
     ...EMBED_HANDLERS,
     ...ENGAGEMENT_HANDLERS,
   }),
