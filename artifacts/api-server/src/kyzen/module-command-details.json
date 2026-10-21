@@ -243,6 +243,18 @@
       ]
     },
     {
+      "rootName": "autologging",
+      "entries": [
+        {
+          "path": "autologging",
+          "signature": "autologging",
+          "description": "Create a Zenyth Logs category with a log channel for every event category.",
+          "depth": 0,
+          "parameters": []
+        }
+      ]
+    },
+    {
       "rootName": "autopublish",
       "entries": [
         {

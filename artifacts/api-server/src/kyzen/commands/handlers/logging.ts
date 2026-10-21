@@ -384,18 +384,37 @@ function resetView(): ContainerBuilder {
 
 const V2: MessageFlags.IsComponentsV2 = MessageFlags.IsComponentsV2;
 
-async function createChannels(guild: Guild, keys: CatKey[]): Promise<number> {
+const LOG_CATEGORY = "Zenyth Logs";
+
+/** Makes (or reuses) the "Zenyth Logs" category and one log channel per category key. */
+async function ensureLogChannels(guild: Guild, keys: readonly CatKey[]): Promise<{ created: number; reused: number; map: Partial<Record<CatKey, string>> }> {
   const c = cfg(guild.id);
-  let parent = guild.channels.cache.find((ch) => ch.type === ChannelType.GuildCategory && ch.name.toLowerCase() === "logs");
-  if (!parent) parent = await guild.channels.create({ name: "Logs", type: ChannelType.GuildCategory, permissionOverwrites: [{ id: guild.roles.everyone.id, deny: [PermissionFlagsBits.ViewChannel] }] });
-  let n = 0;
+  const botId = guild.client.user.id;
+  let parent = guild.channels.cache.find((ch) => ch.type === ChannelType.GuildCategory && ch.name.toLowerCase() === LOG_CATEGORY.toLowerCase());
+  if (!parent) {
+    parent = await guild.channels.create({
+      name: LOG_CATEGORY,
+      type: ChannelType.GuildCategory,
+      permissionOverwrites: [
+        { id: guild.roles.everyone.id, deny: [PermissionFlagsBits.ViewChannel] },
+        { id: botId, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.EmbedLinks, PermissionFlagsBits.ReadMessageHistory] },
+      ],
+      reason: "Autologging setup",
+    }).catch(() => { throw new CommandError("I could not create the category. I need the **Manage Channels** permission."); });
+  }
+  let created = 0, reused = 0;
+  const map: Partial<Record<CatKey, string>> = {};
   for (const key of keys) {
-    const ch = await guild.channels.create({ name: `${key}-logs`, type: ChannelType.GuildText, parent: parent.id, reason: "Logging setup" }).catch(() => null);
-    if (ch) { c.channels[key] = ch.id; n += 1; }
+    const mapped = c.channels[key] ? guild.channels.cache.get(c.channels[key]) : undefined;
+    const existing = mapped ?? guild.channels.cache.find((ch) => ch.parentId === parent!.id && ch.type === ChannelType.GuildText && ch.name === `${key}-logs`);
+    if (existing) { c.channels[key] = existing.id; map[key] = existing.id; reused += 1; continue; }
+    const ch = await guild.channels.create({ name: `${key}-logs`, type: ChannelType.GuildText, parent: parent.id, topic: `Zenyth logs: ${CATEGORIES.find((x) => x.key === key)!.what}`, reason: "Autologging setup" }).catch(() => null);
+    if (ch) { c.channels[key] = ch.id; map[key] = ch.id; created += 1; }
   }
   save();
-  return n;
+  return { created, reused, map };
 }
+const createChannels = async (guild: Guild, keys: CatKey[]): Promise<number> => (await ensureLogChannels(guild, keys)).created;
 
 async function handlePanel(i: Interaction): Promise<void> {
   if (!("customId" in i) || !i.customId.startsWith("log:") || !i.guild) return;
@@ -463,6 +482,14 @@ async function ignoreTarget(ctx: Ctx): Promise<{ kind: "users" | "roles" | "chan
 }
 
 export const LOGGING_HANDLERS: Record<string, Handler> = {
+  autologging: async (ctx) => {
+    const { created, reused, map } = await ensureLogChannels(ctx.guild, CATEGORIES.map((c) => c.key));
+    const lines = CATEGORIES.map((c) => `${map[c.key] ? `<#${map[c.key]}>` : "*could not create*"} - ${c.label}`);
+    await ctx.reply(embed(
+      `${lines.join("\n")}\n\nCreated **${created}** channel${created === 1 ? "" : "s"}${reused ? ` and reused **${reused}** that already existed` : ""} in the **${LOG_CATEGORY}** category. Logging is now on for every category. Only members who can see the category (such as administrators) can read the logs.`,
+      "Autologging ready",
+    ));
+  },
   "logging panel": openPanel,
   "logging setup": async (ctx) => {
     if (!ctx.args[0]) return openPanel(ctx);
