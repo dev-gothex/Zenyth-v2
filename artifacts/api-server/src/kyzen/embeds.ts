@@ -38,7 +38,7 @@ const DOCUMENTATION_URL = "https://zenythbot.in/documentation";
 const SUPPORT_SERVER_URL = "https://discord.gg/ztZwb9fGyZ";
 const PARTNER_SERVER_URL = "https://discord.gg/singles";
 const INVITE_URL =
-  "https://discord.com/oauth2/authorize?client_id=1561404302084284556&permissions=8&integration_type=0&scope=bot+applications.commands";
+  "https://discord.com/oauth2/authorize?client_id=1561603585635258398&permissions=8&integration_type=0&scope=bot+applications.commands";
 const OWNER_ID = "1561255430838030338";
 const COMMANDS_PER_PAGE = 12;
 const MODULE_COMMAND_SUMMARIES = rawModuleCommandSummaries as Record<
